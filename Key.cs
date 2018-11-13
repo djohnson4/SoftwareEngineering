@@ -5,6 +5,7 @@ public class Key
     private sealed Byte keyID;
     private Boolean aBoolean;
     private DateTime lastModified;
+    private string status = "";
 
 	public Key(Byte keyID)
     {
@@ -19,17 +20,27 @@ public class Key
         this.lastModified = DateTime.Now;
     }
 
-    public Boolean isAssigned()
+    protected void setStatus(string status)
+    {
+        this.status = status;
+    }
+
+    protected string getStatus()
+    {
+        return status;
+    }
+
+    protected Boolean isAssigned()
     {
         return aBoolean;
     }
 
-    public Byte getKeyID()
+    protected Byte getKeyID()
     {
         return keyID;
     }
 
-    public void setaBoolean(Boolean aBoolean)
+    protected void setaBoolean(Boolean aBoolean)
     {
         this.aBoolean = aBoolean;
         this.lastModified = DateTime.Now;
