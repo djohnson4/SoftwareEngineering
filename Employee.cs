@@ -19,22 +19,22 @@ public class Employee
         this.aBoolean = aBoolean;
     }
 
-    public Boolean isManager()
+    protected Boolean isManager()
     {
         return aBoolean;
     }
 
-    public String getFirstName()
+    protected String getFirstName()
     {
         return firstName;
     }
 
-    public String getLastName()
+    protected String getLastName()
     {
         return lastName;
     }
 
-    public override string toString()
+    protected override string toString()
     {
         return lastName + ", " + firstName;
     }
