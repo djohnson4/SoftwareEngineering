@@ -6,10 +6,9 @@ namespace AugustaUniversity.SoftwareEngineering.KeyRequest
     {
         private Boolean isManager;
 
-        public Manager(String firstName, String lastName, Boolean isManager)
+        public Manager(int userID, String password, Boolean isManager)
         {
-            base(firstName, lastName);
-            this.isManager = isManager;
+            base(userID, password, isManager);
         }
     }
 }

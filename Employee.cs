@@ -4,41 +4,42 @@ namespace AugustaUniversity.SoftwareEngineering.KeyRequest
 {
     public class Employee
     {
-        private sealed String firstName;
-        private sealed String lastName;
         private Boolean aBoolean;
+        private int userID;
+        private string password;
 
-        public Employee(String firstName, String lastName)
+        public Employee(int userID, String password)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
+            this.userID = userID;
+            this.password = password;
         }
 
-        public Employee(String firstName, String lastName, Boolean aBoolean)
+        public Employee(int userID, String password, Boolean aBoolean)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
+            this.userID = userID;
+            this.password = password;
             this.aBoolean = aBoolean;
         }
 
-        protected Boolean isManager()
+        public int getEmployeeID()
+        {
+            return userID;
+        }
+
+        public void setEmployeeID(int userID)
+        {
+            this.userID = userID;
+        }
+
+        protected Boolean getIsManager()
         {
             return aBoolean;
         }
 
-        protected String getFirstName()
+        protected void setIsManager(Boolean aBoolean)
         {
-            return firstName;
+            this.aBoolean = aBoolean;
         }
 
-        protected String getLastName()
-        {
-            return lastName;
-        }
-
-        protected override string toString()
-        {
-            return lastName + ", " + firstName;
-        }
     }
 }
