@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Entity
+namespace KeyRequest.Entity
 {
     public class Session
     {
