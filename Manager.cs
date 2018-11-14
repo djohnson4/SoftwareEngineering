@@ -1,13 +1,15 @@
 ﻿using System;
 
-
-public class Manager: Employee
+namespace AugustaUniversity.SoftwareEngineering.KeyRequest
 {
-    private Boolean isManager;
+    public class Manager : Employee
+    {
+        private Boolean isManager;
 
-    public Manager(String firstName, String lastName, Boolean isManager)
-	{
-        base(firstName, lastName);
-        this.isManager = isManager;
-	}
+        public Manager(String firstName, String lastName, Boolean isManager)
+        {
+            base(firstName, lastName);
+            this.isManager = isManager;
+        }
+    }
 }

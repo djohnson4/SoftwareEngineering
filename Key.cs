@@ -1,48 +1,51 @@
 ﻿using System;
 
-public class Key
+namespace AugustaUniversity.SoftwareEngineering.KeyRequest
 {
-    private sealed Byte keyID;
-    private Boolean aBoolean;
-    private DateTime lastModified;
-    private string status = "";
-
-	public Key(Byte keyID)
+    public class Key
     {
-        this.keyID = keyID;
-        this.lastModified = DateTime.Now;
-    }
+        private sealed Byte keyID;
+        private Boolean aBoolean;
+        private DateTime lastModified;
+        private string status = "";
 
-    public Key(Byte keyID, Boolean aBoolean)
-    {
-        this.keyID = keyID;
-        this.aBoolean = aBoolean;
-        this.lastModified = DateTime.Now;
-    }
+        public Key(Byte keyID)
+        {
+            this.keyID = keyID;
+            this.lastModified = DateTime.Now;
+        }
 
-    protected void setStatus(string status)
-    {
-        this.status = status;
-    }
+        public Key(Byte keyID, Boolean aBoolean)
+        {
+            this.keyID = keyID;
+            this.aBoolean = aBoolean;
+            this.lastModified = DateTime.Now;
+        }
 
-    protected string getStatus()
-    {
-        return status;
-    }
+        protected void setStatus(string status)
+        {
+            this.status = status;
+        }
 
-    protected Boolean isAssigned()
-    {
-        return aBoolean;
-    }
+        protected string getStatus()
+        {
+            return status;
+        }
 
-    protected Byte getKeyID()
-    {
-        return keyID;
-    }
+        protected Boolean isAssigned()
+        {
+            return aBoolean;
+        }
 
-    protected void setaBoolean(Boolean aBoolean)
-    {
-        this.aBoolean = aBoolean;
-        this.lastModified = DateTime.Now;
+        protected Byte getKeyID()
+        {
+            return keyID;
+        }
+
+        protected void setaBoolean(Boolean aBoolean)
+        {
+            this.aBoolean = aBoolean;
+            this.lastModified = DateTime.Now;
+        }
     }
 }

@@ -1,41 +1,44 @@
 ﻿using System;
 
-public class Employee
+namespace AugustaUniversity.SoftwareEngineering.KeyRequest
 {
-    private sealed String firstName;
-    private sealed String lastName;
-    private Boolean aBoolean;
-
-    public Employee(String firstName, String lastName)
-	{
-        this.firstName = firstName;
-        this.lastName = lastName;
-	}
-
-    public Employee(String firstName, String lastName, Boolean aBoolean)
+    public class Employee
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.aBoolean = aBoolean;
-    }
+        private sealed String firstName;
+        private sealed String lastName;
+        private Boolean aBoolean;
 
-    protected Boolean isManager()
-    {
-        return aBoolean;
-    }
+        public Employee(String firstName, String lastName)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
 
-    protected String getFirstName()
-    {
-        return firstName;
-    }
+        public Employee(String firstName, String lastName, Boolean aBoolean)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.aBoolean = aBoolean;
+        }
 
-    protected String getLastName()
-    {
-        return lastName;
-    }
+        protected Boolean isManager()
+        {
+            return aBoolean;
+        }
 
-    protected override string toString()
-    {
-        return lastName + ", " + firstName;
+        protected String getFirstName()
+        {
+            return firstName;
+        }
+
+        protected String getLastName()
+        {
+            return lastName;
+        }
+
+        protected override string toString()
+        {
+            return lastName + ", " + firstName;
+        }
     }
 }
