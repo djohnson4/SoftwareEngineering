@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AugustaUniversity.SoftwareEngineering.KeyRequest
+namespace Entity
 {
     public class Key
     {
