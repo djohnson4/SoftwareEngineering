@@ -1,0 +1,5 @@
+C:\Users\aubre\source\repos\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.csprojResolveAssemblyReference.cache
+C:\Users\aubre\source\repos\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.LoginForm.resources
+C:\Users\aubre\source\repos\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.Properties.Resources.resources
+C:\Users\aubre\source\repos\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.csproj.GenerateResource.cache
+C:\Users\aubre\source\repos\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.csproj.CoreCompileInputs.cache
