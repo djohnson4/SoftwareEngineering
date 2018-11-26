@@ -365,7 +365,7 @@ namespace KeyManagementSystem {
             
             private global::System.Data.DataColumn columnkeyID;
             
-            private global::System.Data.DataColumn columndateTime;
+            private global::System.Data.DataColumn columnlastUpdated;
             
             private global::System.Data.DataColumn columnstatus;
             
@@ -414,9 +414,9 @@ namespace KeyManagementSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn dateTimeColumn {
+            public global::System.Data.DataColumn lastUpdatedColumn {
                 get {
-                    return this.columndateTime;
+                    return this.columnlastUpdated;
                 }
             }
             
@@ -473,11 +473,11 @@ namespace KeyManagementSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public KEYRow AddKEYRow(string keyID, System.DateTime dateTime, string status, USERRow parentUSERRowByFK_KEY_ToUser) {
+            public KEYRow AddKEYRow(string keyID, System.DateTime lastUpdated, string status, USERRow parentUSERRowByFK_KEY_ToUser) {
                 KEYRow rowKEYRow = ((KEYRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         keyID,
-                        dateTime,
+                        lastUpdated,
                         status,
                         null};
                 if ((parentUSERRowByFK_KEY_ToUser != null)) {
@@ -513,7 +513,7 @@ namespace KeyManagementSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnkeyID = base.Columns["keyID"];
-                this.columndateTime = base.Columns["dateTime"];
+                this.columnlastUpdated = base.Columns["lastUpdated"];
                 this.columnstatus = base.Columns["status"];
                 this.columnuserID = base.Columns["userID"];
             }
@@ -523,8 +523,8 @@ namespace KeyManagementSystem {
             private void InitClass() {
                 this.columnkeyID = new global::System.Data.DataColumn("keyID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnkeyID);
-                this.columndateTime = new global::System.Data.DataColumn("dateTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndateTime);
+                this.columnlastUpdated = new global::System.Data.DataColumn("lastUpdated", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlastUpdated);
                 this.columnstatus = new global::System.Data.DataColumn("status", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstatus);
                 this.columnuserID = new global::System.Data.DataColumn("userID", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1285,17 +1285,17 @@ namespace KeyManagementSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime dateTime {
+            public System.DateTime lastUpdated {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableKEY.dateTimeColumn]));
+                        return ((global::System.DateTime)(this[this.tableKEY.lastUpdatedColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'dateTime\' in table \'KEY\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'lastUpdated\' in table \'KEY\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableKEY.dateTimeColumn] = value;
+                    this[this.tableKEY.lastUpdatedColumn] = value;
                 }
             }
             
@@ -1344,14 +1344,14 @@ namespace KeyManagementSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsdateTimeNull() {
-                return this.IsNull(this.tableKEY.dateTimeColumn);
+            public bool IslastUpdatedNull() {
+                return this.IsNull(this.tableKEY.lastUpdatedColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetdateTimeNull() {
-                this[this.tableKEY.dateTimeColumn] = global::System.Convert.DBNull;
+            public void SetlastUpdatedNull() {
+                this[this.tableKEY.lastUpdatedColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1781,7 +1781,7 @@ namespace KeyManagementSystem.Database1DataSetTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "KEY";
             tableMapping.ColumnMappings.Add("keyID", "keyID");
-            tableMapping.ColumnMappings.Add("dateTime", "dateTime");
+            tableMapping.ColumnMappings.Add("dateTime", "lastUpdated");
             tableMapping.ColumnMappings.Add("status", "status");
             tableMapping.ColumnMappings.Add("userID", "userID");
             this._adapter.TableMappings.Add(tableMapping);

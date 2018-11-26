@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="KEY">
+    <Key>
+      <PropertyRef Name="keyID" />
+    </Key>
+    <Property Name="keyID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dateTime" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="USER" Relationship="Self.FK_KEY_ToUser" FromRole="KEY" ToRole="USER" />
+  </EntityType>
+  <EntityType Name="SESSION">
+    <Key>
+      <PropertyRef Name="sessionID" />
+    </Key>
+    <Property Name="start_dateTime" Type="DateTime" Precision="3" />
+    <Property Name="end_dateTime" Type="DateTime" Precision="3" />
+    <Property Name="sessionID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="USER" Relationship="Self.FK_SESSION_ToUSER" FromRole="SESSION" ToRole="USER" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isManager" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="KEYs" Relationship="Self.FK_KEY_ToUser" FromRole="USER" ToRole="KEY" />
+    <NavigationProperty Name="SESSIONs" Relationship="Self.FK_SESSION_ToUSER" FromRole="USER" ToRole="SESSION" />
+  </EntityType>
+  <Association Name="FK_KEY_ToUser">
+    <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+    <End Role="KEY" Type="Self.KEY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="KEY">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SESSION_ToUSER">
+    <End Role="USER" Type="Self.USER" Multiplicity="1" />
+    <End Role="SESSION" Type="Self.SESSION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="SESSION">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="KEYs" EntityType="Self.KEY" />
+    <EntitySet Name="SESSIONs" EntityType="Self.SESSION" />
+    <EntitySet Name="USERs" EntityType="Self.USER" />
+    <AssociationSet Name="FK_KEY_ToUser" Association="Self.FK_KEY_ToUser">
+      <End Role="USER" EntitySet="USERs" />
+      <End Role="KEY" EntitySet="KEYs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SESSION_ToUSER" Association="Self.FK_SESSION_ToUSER">
+      <End Role="USER" EntitySet="USERs" />
+      <End Role="SESSION" EntitySet="SESSIONs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

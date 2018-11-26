@@ -3,3 +3,9 @@ C:\Users\aubre\source\repos\KeyManagementSystem\KeyManagementSystem\obj\Debug\Ke
 C:\Users\aubre\source\repos\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.Properties.Resources.resources
 C:\Users\aubre\source\repos\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.csproj.GenerateResource.cache
 C:\Users\aubre\source\repos\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.csproj.CoreCompileInputs.cache
+C:\Users\aubre\Documents\SoftwareEngineeringCode\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.csprojAssemblyReference.cache
+C:\Users\aubre\Documents\SoftwareEngineeringCode\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.KeyRequestForm.resources
+C:\Users\aubre\Documents\SoftwareEngineeringCode\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.LoginForm.resources
+C:\Users\aubre\Documents\SoftwareEngineeringCode\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.Properties.Resources.resources
+C:\Users\aubre\Documents\SoftwareEngineeringCode\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.csproj.GenerateResource.cache
+C:\Users\aubre\Documents\SoftwareEngineeringCode\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.csproj.CoreCompileInputs.cache

@@ -65,7 +65,7 @@ SELECT keyID, dateTime, status, userID FROM [KEY] WHERE (keyID = @keyID)</Comman
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="keyID" DataSetColumn="keyID" />
-              <Mapping SourceColumn="dateTime" DataSetColumn="dateTime" />
+              <Mapping SourceColumn="dateTime" DataSetColumn="lastUpdated" />
               <Mapping SourceColumn="status" DataSetColumn="status" />
               <Mapping SourceColumn="userID" DataSetColumn="userID" />
             </Mappings>
@@ -194,7 +194,7 @@ SELECT userID, password, isManager FROM [USER] WHERE (userID = @userID)</Command
   <xs:element name="Database1DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="Database1DataSet" msprop:Generator_UserDSName="Database1DataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="KEY" msprop:Generator_TableClassName="KEYDataTable" msprop:Generator_TableVarName="tableKEY" msprop:Generator_TablePropName="KEY" msprop:Generator_RowDeletingName="KEYRowDeleting" msprop:Generator_RowChangingName="KEYRowChanging" msprop:Generator_RowEvHandlerName="KEYRowChangeEventHandler" msprop:Generator_RowDeletedName="KEYRowDeleted" msprop:Generator_UserTableName="KEY" msprop:Generator_RowChangedName="KEYRowChanged" msprop:Generator_RowEvArgName="KEYRowChangeEvent" msprop:Generator_RowClassName="KEYRow">
+        <xs:element name="KEY" msprop:Generator_TableClassName="KEYDataTable" msprop:Generator_TableVarName="tableKEY" msprop:Generator_RowChangedName="KEYRowChanged" msprop:Generator_TablePropName="KEY" msprop:Generator_RowDeletingName="KEYRowDeleting" msprop:Generator_RowChangingName="KEYRowChanging" msprop:Generator_RowEvHandlerName="KEYRowChangeEventHandler" msprop:Generator_RowDeletedName="KEYRowDeleted" msprop:Generator_RowClassName="KEYRow" msprop:Generator_UserTableName="KEY" msprop:Generator_RowEvArgName="KEYRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="keyID" msprop:Generator_ColumnVarNameInTable="columnkeyID" msprop:Generator_ColumnPropNameInRow="keyID" msprop:Generator_ColumnPropNameInTable="keyIDColumn" msprop:Generator_UserColumnName="keyID">
@@ -204,7 +204,7 @@ SELECT userID, password, isManager FROM [USER] WHERE (userID = @userID)</Command
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="dateTime" msprop:Generator_ColumnVarNameInTable="columndateTime" msprop:Generator_ColumnPropNameInRow="dateTime" msprop:Generator_ColumnPropNameInTable="dateTimeColumn" msprop:Generator_UserColumnName="dateTime" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="lastUpdated" msprop:Generator_ColumnVarNameInTable="columnlastUpdated" msprop:Generator_ColumnPropNameInRow="lastUpdated" msprop:Generator_ColumnPropNameInTable="lastUpdatedColumn" msprop:Generator_UserColumnName="lastUpdated" type="xs:dateTime" minOccurs="0" />
               <xs:element name="status" msprop:Generator_ColumnVarNameInTable="columnstatus" msprop:Generator_ColumnPropNameInRow="status" msprop:Generator_ColumnPropNameInTable="statusColumn" msprop:Generator_UserColumnName="status" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -222,7 +222,7 @@ SELECT userID, password, isManager FROM [USER] WHERE (userID = @userID)</Command
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SESSION" msprop:Generator_TableClassName="SESSIONDataTable" msprop:Generator_TableVarName="tableSESSION" msprop:Generator_TablePropName="SESSION" msprop:Generator_RowDeletingName="SESSIONRowDeleting" msprop:Generator_RowChangingName="SESSIONRowChanging" msprop:Generator_RowEvHandlerName="SESSIONRowChangeEventHandler" msprop:Generator_RowDeletedName="SESSIONRowDeleted" msprop:Generator_UserTableName="SESSION" msprop:Generator_RowChangedName="SESSIONRowChanged" msprop:Generator_RowEvArgName="SESSIONRowChangeEvent" msprop:Generator_RowClassName="SESSIONRow">
+        <xs:element name="SESSION" msprop:Generator_TableClassName="SESSIONDataTable" msprop:Generator_TableVarName="tableSESSION" msprop:Generator_RowChangedName="SESSIONRowChanged" msprop:Generator_TablePropName="SESSION" msprop:Generator_RowDeletingName="SESSIONRowDeleting" msprop:Generator_RowChangingName="SESSIONRowChanging" msprop:Generator_RowEvHandlerName="SESSIONRowChangeEventHandler" msprop:Generator_RowDeletedName="SESSIONRowDeleted" msprop:Generator_RowClassName="SESSIONRow" msprop:Generator_UserTableName="SESSION" msprop:Generator_RowEvArgName="SESSIONRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="start_dateTime" msprop:Generator_ColumnVarNameInTable="columnstart_dateTime" msprop:Generator_ColumnPropNameInRow="start_dateTime" msprop:Generator_ColumnPropNameInTable="start_dateTimeColumn" msprop:Generator_UserColumnName="start_dateTime" type="xs:dateTime" minOccurs="0" />
@@ -244,7 +244,7 @@ SELECT userID, password, isManager FROM [USER] WHERE (userID = @userID)</Command
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="USER" msprop:Generator_TableClassName="USERDataTable" msprop:Generator_TableVarName="tableUSER" msprop:Generator_TablePropName="USER" msprop:Generator_RowDeletingName="USERRowDeleting" msprop:Generator_RowChangingName="USERRowChanging" msprop:Generator_RowEvHandlerName="USERRowChangeEventHandler" msprop:Generator_RowDeletedName="USERRowDeleted" msprop:Generator_UserTableName="USER" msprop:Generator_RowChangedName="USERRowChanged" msprop:Generator_RowEvArgName="USERRowChangeEvent" msprop:Generator_RowClassName="USERRow">
+        <xs:element name="USER" msprop:Generator_TableClassName="USERDataTable" msprop:Generator_TableVarName="tableUSER" msprop:Generator_RowChangedName="USERRowChanged" msprop:Generator_TablePropName="USER" msprop:Generator_RowDeletingName="USERRowDeleting" msprop:Generator_RowChangingName="USERRowChanging" msprop:Generator_RowEvHandlerName="USERRowChangeEventHandler" msprop:Generator_RowDeletedName="USERRowDeleted" msprop:Generator_RowClassName="USERRow" msprop:Generator_UserTableName="USER" msprop:Generator_RowEvArgName="USERRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="userID" msprop:Generator_ColumnVarNameInTable="columnuserID" msprop:Generator_ColumnPropNameInRow="userID" msprop:Generator_ColumnPropNameInTable="userIDColumn" msprop:Generator_UserColumnName="userID">
@@ -282,8 +282,8 @@ SELECT userID, password, isManager FROM [USER] WHERE (userID = @userID)</Command
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_KEY_ToUser" msdata:parent="USER" msdata:child="KEY" msdata:parentkey="userID" msdata:childkey="userID" msprop:Generator_UserChildTable="KEY" msprop:Generator_ChildPropName="GetKEYRows" msprop:Generator_UserRelationName="FK_KEY_ToUser" msprop:Generator_RelationVarName="relationFK_KEY_ToUser" msprop:Generator_UserParentTable="USER" msprop:Generator_ParentPropName="USERRow" />
-      <msdata:Relationship name="FK_SESSION_ToUSER" msdata:parent="USER" msdata:child="SESSION" msdata:parentkey="userID" msdata:childkey="userID" msprop:Generator_UserChildTable="SESSION" msprop:Generator_ChildPropName="GetSESSIONRows" msprop:Generator_UserRelationName="FK_SESSION_ToUSER" msprop:Generator_RelationVarName="relationFK_SESSION_ToUSER" msprop:Generator_UserParentTable="USER" msprop:Generator_ParentPropName="USERRow" />
+      <msdata:Relationship name="FK_KEY_ToUser" msdata:parent="USER" msdata:child="KEY" msdata:parentkey="userID" msdata:childkey="userID" msprop:Generator_UserChildTable="KEY" msprop:Generator_ChildPropName="GetKEYRows" msprop:Generator_UserRelationName="FK_KEY_ToUser" msprop:Generator_ParentPropName="USERRow" msprop:Generator_RelationVarName="relationFK_KEY_ToUser" msprop:Generator_UserParentTable="USER" />
+      <msdata:Relationship name="FK_SESSION_ToUSER" msdata:parent="USER" msdata:child="SESSION" msdata:parentkey="userID" msdata:childkey="userID" msprop:Generator_UserChildTable="SESSION" msprop:Generator_ChildPropName="GetSESSIONRows" msprop:Generator_UserRelationName="FK_SESSION_ToUSER" msprop:Generator_ParentPropName="USERRow" msprop:Generator_RelationVarName="relationFK_SESSION_ToUSER" msprop:Generator_UserParentTable="USER" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
