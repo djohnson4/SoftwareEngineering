@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 
@@ -18,6 +19,62 @@ namespace KeyManagementSystem
         Entity.Employee verifyUser(string username, string password)
         {
             //when do passwords get hashed and how does that work? 
+
+            //passwords get hashed when the login/account is created. The hashed passwords are saved to the database. Whenenever someone
+            //tries to login, the text is the textbox gets hashed, then the hashed password gets checked with the database
+        }
+
+        protected void createUser(int id, String password, Boolean isManager)
+        {
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+            var keyD = new Rfc2898DeriveBytes(password, salt, 10000);
+            byte[] hash = keyD.GetBytes(20);
+            byte[] hashB = new byte[36];
+            Array.Copy(salt, 0, hashB, 0, 16);
+            Array.Copy(hash, 0, hashB, 16, 20);
+            string pHash = Convert.ToBase64String(hashB);
+            using (connection)
+            {
+                string sql = null;
+                sql = "insert into USER ([userID], [password], [isManager]) values(@id,@password,@isManager)";
+                using(SqlCommand sqlCommand = new SqlCommand(sql, connection))
+                {
+                    connection.Open();
+                    sqlCommand.Parameters.AddWithValue("@userID", id);
+                    sqlCommand.Parameters.AddWithValue("@password", pHash);
+                    sqlCommand.Parameters.AddWithValue("@isManager", isManager);
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+        }
+
+        protected Employee getLogin(int id)
+        {
+            int eID;
+            string password = null;
+            Boolean isManager;
+            using (connection)
+            {
+                connection.Open();
+                string sql = "SELECT id, password, isManager FROM USER WHERE id=@id";
+                using(SqlCommand sqlCmd = new SqlCommand(sql, connection))
+                {
+                    sqlCmd.Parameters.AddWithValue("@id", id);
+                    using (SqlDataReader sqlReader = sqlCmd.ExecuteReader())
+                    {
+                        eID = Convert.ToInt32(sqlReader["id"].ToString());
+                        password = sqlReader["password"].ToString();
+                        if (sqlReader["isManager"].ToString().Equals(true))
+                            isManager = true;
+                        else
+                            isManager = false;
+                    }
+                }
+                connection.Close();
+            }
+            Employee employee = new Employee(id, password, isManager);
+            return employee;
         }
 
         private void getKeys(Entity.Employee user)

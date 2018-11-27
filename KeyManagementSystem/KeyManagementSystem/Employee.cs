@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Entity
+namespace KeyManagementSystem
 {
     public class Employee
     {
