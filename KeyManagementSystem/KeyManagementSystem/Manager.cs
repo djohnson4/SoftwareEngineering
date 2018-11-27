@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace KeyRequest.Entity
+namespace Entity
 {
     public class Manager : Employee
     {
-        private Boolean isManager;
+        private Boolean isManager = true;
 
         public Manager(int userID, String password, Boolean isManager)
         {

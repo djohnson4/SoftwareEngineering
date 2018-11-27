@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KeyRequest.Entity
+namespace Entity
 {
     public class Employee
     {

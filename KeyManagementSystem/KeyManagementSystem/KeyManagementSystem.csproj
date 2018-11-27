@@ -74,6 +74,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database1DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DBConnector.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
