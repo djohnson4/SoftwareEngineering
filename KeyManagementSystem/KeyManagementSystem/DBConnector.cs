@@ -79,7 +79,7 @@ namespace KeyManagementSystem
             return employee;
         }
 
-        public void getKeys(Entity.Employee user, ref DataTable Keys)//accepts a user and a reference to a dataTable, and displays all the keys associated with that user or with 'open' status
+        public void getKeys(Employee user, ref DataTable Keys)//accepts a user and a reference to a dataTable, and displays all the keys associated with that user or with 'open' status
         {
             int userID = user.getEmployeeID();
             string stringcmd = "SELECT * FROM dbo.KEY WHERE userID = '" + userID.ToString()+"' OR status = 'open'";
