@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
 
-namespace KeyManagementSystem
+namespace KeyManagementSystem.Boundary
 {
     public partial class LoginForm : Form
     {

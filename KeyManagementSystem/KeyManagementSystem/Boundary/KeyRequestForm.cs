@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace KeyManagementSystem
+namespace KeyManagementSystem.Boundary
 {
     public partial class KeyRequestForm : Form
     {

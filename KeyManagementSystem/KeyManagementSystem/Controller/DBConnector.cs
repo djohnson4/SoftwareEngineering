@@ -11,7 +11,7 @@ using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace KeyManagementSystem
+namespace KeyManagementSystem.Controller
 {
     class DBConnector
     {
