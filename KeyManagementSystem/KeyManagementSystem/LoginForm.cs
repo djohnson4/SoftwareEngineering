@@ -16,6 +16,9 @@ namespace KeyManagementSystem
     {
 
         static int attempt = 3;
+        private int username;
+        private string password;
+
 
         public LoginForm()
         {
@@ -29,7 +32,7 @@ namespace KeyManagementSystem
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -49,7 +52,10 @@ namespace KeyManagementSystem
 
         protected void login_Click(object sender, EventArgs e)
         {
-            
+            LoginController helper = new LoginController();
+            int username = Convert.ToInt32(idBox.Text);
+            string password = passwordBox.Text;
+            helper.login(username, password);
         }
     }
 }
