@@ -18,7 +18,7 @@ namespace KeyManagementSystem
         private readonly SqlConnection connection = new SqlConnection("Database1.mdf");
         string command;
         //SqlCommand command = new SqlCommand();
-        Entity.Employee verifyUser(string username, string password)
+        Employee verifyUser(string username, string password)
         {
             //when do passwords get hashed and how does that work? 
 
@@ -93,6 +93,7 @@ namespace KeyManagementSystem
                     SqlDataReader reader = cmd.ExecuteReader();
                     Keys.Load(reader);
                 }
+                con.Close();
             }
             //var dataAdapter = new SqlDataAdapter(command, connection);
             //connection.Open();

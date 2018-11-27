@@ -33,8 +33,8 @@ namespace KeyManagementSystem
         private DataTable GetAvailableKeys()
         {
             DataTable Keys = new DataTable();
-            DBConnector.getKeys(ref Keys);
-                return Keys;
+            DBConnector.getKeys(user, ref Keys);//need to have a way of accessing the user for the current session
+            return Keys;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

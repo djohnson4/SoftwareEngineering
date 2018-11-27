@@ -49,8 +49,7 @@ namespace KeyManagementSystem
 
         protected void login_Click(object sender, EventArgs e)
         {
-            SqlConnection sql = new SqlConnection();
-            if (sql.get)
+            
         }
     }
 }
