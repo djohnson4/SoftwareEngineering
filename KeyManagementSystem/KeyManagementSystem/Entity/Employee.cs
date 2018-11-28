@@ -22,6 +22,11 @@ namespace KeyManagementSystem.Entity
             this.aBoolean = aBoolean;
         }
 
+        public String getPassword()
+        {
+            return password;
+        }
+
         public int getEmployeeID()
         {
             return userID;
@@ -32,12 +37,12 @@ namespace KeyManagementSystem.Entity
             this.userID = userID;
         }
 
-        protected Boolean getIsManager()
+        public Boolean getIsManager()
         {
             return aBoolean;
         }
 
-        protected void setIsManager(Boolean aBoolean)
+        public void setIsManager(Boolean aBoolean)
         {
             this.aBoolean = aBoolean;
         }

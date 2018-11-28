@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
-using Entity;
+using KeyManagementSystem.Entity;
+using KeyManagementSystem.Controller;
 
 namespace KeyManagementSystem.Controller
 {
@@ -15,9 +16,9 @@ namespace KeyManagementSystem.Controller
             DateTime dateTime = DateTime.Now;
             DBConnector dBConnector = new DBConnector();
             Employee employee = dBConnector.getLogin(id);
-            if (IsNumericType(employee.userID) && !employee.password.Equals(null))
+            if (IsNumericType(employee.getEmployeeID()) && !employee.getPassword().Equals(null))
             {
-                String pHash = employee.password;
+                String pHash = employee.getPassword();
                 byte[] hash = Convert.FromBase64String(pHash);
                 byte[] salt = new byte[16];
                 Array.Copy(hash, 0, salt, 0, 16);
@@ -26,9 +27,9 @@ namespace KeyManagementSystem.Controller
                 for (int i = 0; i < 20; i++)
                     if (hash[i + 16] != hash[i])
                         return 0;
-                if (employee.aBoolean == true)
+                if (employee.getIsManager() == true)
                 {
-                    dBConnector.sa
+                    dBConnector.sav
                 }
             }
         }

@@ -9,14 +9,14 @@ using System.Security.Cryptography;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
-using Entity;
 using System.Configuration;
 using KeyManagementSystem.Entity;
+using KeyManagementSystem.Controller;
 
 
-namespace KeyManagementSystem
+namespace KeyManagementSystem.Controller
 {
-    class DBConnector.Controller
+    class DBConnector
     {
         private readonly SqlConnection connection = new SqlConnection("Database1.mdf");
         string command;
@@ -54,7 +54,7 @@ namespace KeyManagementSystem
             }
         }
 
-        protected Employee getLogin(int id)
+        public Employee getLogin(int id)
         {
             int eID;
             string password = null;
