@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
+using Entity;
 using System.Configuration;
 
 namespace KeyManagementSystem
@@ -39,7 +40,7 @@ namespace KeyManagementSystem
             using (connection)
             {
                 string sql = null;
-                sql = "insert into USER ([userID], [password], [isManager]) values(@id,@password,@isManager)";
+                sql = "insert into dbo.USER ([userID], [password], [isManager]) values(@id,@password,@isManager)";
                 using(SqlCommand sqlCommand = new SqlCommand(sql, connection))
                 {
                     connection.Open();
@@ -59,7 +60,7 @@ namespace KeyManagementSystem
             using (connection)
             {
                 connection.Open();
-                string sql = "SELECT id, password, isManager FROM USER WHERE id=@id";
+                string sql = "SELECT id, password, isManager FROM dbo.USER WHERE id=@id";
                 using(SqlCommand sqlCmd = new SqlCommand(sql, connection))
                 {
                     sqlCmd.Parameters.AddWithValue("@id", id);
@@ -77,6 +78,26 @@ namespace KeyManagementSystem
             }
             Employee employee = new Employee(id, password, isManager);
             return employee;
+        }
+
+        public String changeStatus(String status, String keyID, int userID)
+        {
+            using (connection)
+            {
+                connection.Open();
+                String sql = "SELECT keyID FROM dbo.KEY WHERE userID=" +userID.ToString();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.CommandText = "Delete from dbo.KEY where keyID=" + keyID;
+                    command.ExecuteNonQuery();
+                    command.Parameters.AddWithValue("@keyID", keyID);
+                    command.Parameters.AddWithValue("@status", status);
+                    command.Parameters.AddWithValue("@userID", userID);
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+            return "0";
         }
 
         public void getKeys(Employee user, ref DataTable Keys)//accepts a user and a reference to a dataTable, and displays all the keys associated with that user or with 'open' status
