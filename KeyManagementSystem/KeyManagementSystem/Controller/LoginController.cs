@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using Entity;
 
-namespace KeyManagementSystem
+namespace KeyManagementSystem.Controller
 {
     class LoginController
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KeyManagementSystem {
+namespace KeyManagementSystem.Boundary {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace KeyManagementSystem {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KeyManagementSystem.KeyRequestForm", typeof(KeyRequestForm).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KeyManagementSystem.Boundary.KeyRequestForm", typeof(KeyRequestForm).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

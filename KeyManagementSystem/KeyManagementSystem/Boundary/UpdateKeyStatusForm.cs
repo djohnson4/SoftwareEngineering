@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KeyManagementSystem
+namespace KeyManagementSystem.Boundary
 {
     public partial class UpdateKeyStatusForm : Form
     {
