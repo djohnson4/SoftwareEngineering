@@ -14,7 +14,7 @@ using System.Configuration;
 
 namespace KeyManagementSystem
 {
-    class DBConnector
+    class DBConnector.Controller
     {
         private readonly SqlConnection connection = new SqlConnection("Database1.mdf");
         string command;
