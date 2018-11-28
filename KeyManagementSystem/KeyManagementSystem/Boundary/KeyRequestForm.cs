@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
+using Entity;
 
 namespace KeyManagementSystem.Boundary
 {
     public partial class KeyRequestForm : Form
     {
+        private readonly SqlConnection connection = new SqlConnection("Database1.mdf");
         public KeyRequestForm()
         {
             InitializeComponent();
@@ -37,6 +39,14 @@ namespace KeyManagementSystem.Boundary
             return Keys;
         }
 
+        private void requestKey(String keyID, int userID)
+        {
+            RequestController request = new RequestController();
+            var requestStatus = request.requestKey(keyID, userID);
+
+        }
+
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -44,7 +54,8 @@ namespace KeyManagementSystem.Boundary
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            availableKeysList.Update();
+            availableKeysList.Refresh();
         }
     }
 }
