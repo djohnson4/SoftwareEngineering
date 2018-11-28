@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Entity;
 using System.Data.SqlClient;
 
-namespace KeyManagementSystem
+namespace KeyManagementSystem.Controller
 {
     class RequestController
     {
