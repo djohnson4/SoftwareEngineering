@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace KeyManagementSystem
+namespace KeyManagementSystem.Boundary
 {
     partial class LoginForm
     {
@@ -50,7 +50,6 @@ namespace KeyManagementSystem
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider3 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
@@ -121,6 +120,7 @@ namespace KeyManagementSystem
             this.clearButton.Text = "Clear Forms";
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.UseWaitCursor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // errorProvider1
             // 
@@ -134,24 +134,11 @@ namespace KeyManagementSystem
             // 
             this.errorProvider3.ContainerControl = this;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(433, 256);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "label3";
-            this.label3.UseWaitCursor = true;
-            this.label3.Visible = false;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.label2);
@@ -181,7 +168,6 @@ namespace KeyManagementSystem
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ErrorProvider errorProvider2;
         private System.Windows.Forms.ErrorProvider errorProvider3;
-        private Label label3;
     }
 
 

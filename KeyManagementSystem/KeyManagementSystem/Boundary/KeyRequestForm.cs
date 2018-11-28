@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
+using KeyManagementSystem.Controller;
+using KeyManagementSystem.Entity;
 
 namespace KeyManagementSystem.Boundary
 {

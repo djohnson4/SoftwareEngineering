@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
+using KeyManagementSystem.Controller;
+using KeyManagementSystem.Entity;
 
 namespace KeyManagementSystem.Boundary
 {
@@ -56,6 +58,12 @@ namespace KeyManagementSystem.Boundary
             int username = Convert.ToInt32(idBox.Text);
             string password = passwordBox.Text;
             helper.login(username, password);
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            idBox.Text = null;
+            passwordBox.Text = null;
         }
     }
 }

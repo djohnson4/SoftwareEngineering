@@ -10,6 +10,8 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Configuration;
+using KeyManagementSystem.Entity;
+
 
 namespace KeyManagementSystem.Controller
 {

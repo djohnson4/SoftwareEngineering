@@ -1,4 +1,4 @@
-﻿namespace KeyManagementSystem
+﻿namespace KeyManagementSystem.Boundary
 {
     partial class KeyRequestForm
     {
