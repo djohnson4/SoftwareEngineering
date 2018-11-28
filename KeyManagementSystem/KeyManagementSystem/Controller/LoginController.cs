@@ -26,14 +26,22 @@ namespace KeyManagementSystem.Controller
                 byte[] hash1 = keyD.GetBytes(20);
                 for (int i = 0; i < 20; i++)
                     if (hash[i + 16] != hash[i])
-                        return 0;
+                        return -1;
                 if (employee.getIsManager() == true)
                 {
-                    dBConnector.sav
+                    dBConnector.saveLogin(employee.getEmployeeID(), dateTime);
+                    return 0;
                 }
+                else if (employee.getIsManager() == false)
+                {
+                    dBConnector.saveLogin(employee.getEmployeeID(), dateTime);
+                    return 1;
+                }
+                return -1;
             }
+            return -1;
         }
-        public static bool IsNumericType(this object o)
+        public static bool IsNumericType(object o)
         {
             switch (Type.GetTypeCode(o.GetType()))
             {

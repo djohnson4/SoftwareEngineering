@@ -40,7 +40,7 @@ namespace KeyManagementSystem.Boundary
             return Keys;
         }
 
-        private void requestKey(String keyID, int userID)
+        private void RequestKey(String keyID, int userID)
         {
             RequestController request = new RequestController();
             var requestStatus = request.requestKey(keyID, userID);

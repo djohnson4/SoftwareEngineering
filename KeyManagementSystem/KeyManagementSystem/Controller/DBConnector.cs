@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using KeyManagementSystem.Entity;
 using KeyManagementSystem.Controller;
+using Newtonsoft.Json;
 
 
 namespace KeyManagementSystem.Controller
@@ -80,6 +81,76 @@ namespace KeyManagementSystem.Controller
             }
             Employee employee = new Employee(id, password, isManager);
             return employee;
+        }
+
+        public void saveLogin(int userID, DateTime date)
+        {
+            int id = 0;
+            using (connection)
+            {
+                connection.Open();
+                string sql = "SELECT userID FROM dbo.SESSION";
+                using(SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    using(SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            id++;
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            using (connection)
+            {
+                string sql = "";
+                sql = "INSERT into dbo.SESSION ([userID], [sessionID], [time], [log]) values(@userID,@id,@log)";
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.Parameters.AddWithValue("@sessioID", id);
+                    cmd.Parameters.AddWithValue("@time", date);
+                    cmd.Parameters.AddWithValue("@log", "Login");
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void saveLogout(int userID, DateTime date)
+        {
+            int id = 0;
+            using (connection)
+            {
+                connection.Open();
+                string sql = "SELECT userID FROM dbo.SESSION";
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            id++;
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            using (connection)
+            {
+                string sql = "";
+                sql = "INSERT into dbo.SESSION ([userID], [sessionID], [time], [log]) values(@userID,@id,@log)";
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.Parameters.AddWithValue("@sessioID", id);
+                    cmd.Parameters.AddWithValue("@time", date);
+                    cmd.Parameters.AddWithValue("@log", "Logout");
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public String changeStatus(String status, String keyID, int userID)
