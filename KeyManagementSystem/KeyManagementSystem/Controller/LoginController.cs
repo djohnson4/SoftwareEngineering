@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using KeyManagementSystem.Entity;
 using KeyManagementSystem.Controller;
+using KeyManagementSystem.Boundary;
 
 namespace KeyManagementSystem.Controller
 {
     class LoginController
     {
-        public int login(int id, String password)
+        public int login(int id, String password)//returns -1 if invalid, 0 if a manager, 1 if an employee
         {
             DateTime dateTime = DateTime.Now;
             DBConnector dBConnector = new DBConnector();
-            Employee employee = dBConnector.getLogin(id);
+            Employee employee = dBConnector.verifyUser(id);
             if (IsNumericType(employee.getEmployeeID()) && !employee.getPassword().Equals(null))
             {
                 String pHash = employee.getPassword();
@@ -30,11 +31,15 @@ namespace KeyManagementSystem.Controller
                 if (employee.getIsManager() == true)
                 {
                     dBConnector.saveLogin(employee.getEmployeeID(), dateTime);
+                    UpdateKeyStatusForm mgr = new UpdateKeyStatusForm(employee);
+                    mgr.Show();
                     return 0;
                 }
                 else if (employee.getIsManager() == false)
                 {
                     dBConnector.saveLogin(employee.getEmployeeID(), dateTime);
+                    KeyRequestForm krf = new KeyRequestForm(employee);
+                    krf.Show();
                     return 1;
                 }
                 return -1;

@@ -17,3 +17,6 @@ E:\SoftwareEngineering1\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyMan
 E:\SoftwareEngineering1\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.Boundary.UpdateKeyStatusForm.resources
 E:\SoftwareEngineering1\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.csproj.GenerateResource.cache
 E:\SoftwareEngineering1\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.csproj.CoreCompileInputs.cache
+C:\Users\aubre\Documents\SoftwareEngineeringCode\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.Boundary.KeyRequestForm.resources
+C:\Users\aubre\Documents\SoftwareEngineeringCode\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.Boundary.LoginForm.resources
+C:\Users\aubre\Documents\SoftwareEngineeringCode\KeyManagementSystem\KeyManagementSystem\obj\Debug\KeyManagementSystem.Boundary.UpdateKeyStatusForm.resources

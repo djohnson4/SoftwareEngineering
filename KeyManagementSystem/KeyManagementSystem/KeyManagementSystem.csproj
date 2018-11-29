@@ -82,11 +82,6 @@
     </Compile>
     <Compile Include="Controller\DBConnector.cs" />
     <Compile Include="Entity\Employee.cs" />
-    <Compile Include="Boundary\KeyRequestForm1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KeyRequestForm.resx</DependentUpon>
-    </Compile>
     <Compile Include="Boundary\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,7 +95,6 @@
     <Compile Include="Boundary\KeyRequestForm.Designer.cs">
       <DependentUpon>KeyRequestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Entity\Manager.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

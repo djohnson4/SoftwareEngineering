@@ -16,7 +16,6 @@ namespace KeyManagementSystem.Boundary
 {
     public partial class LoginForm : Form
     {
-
         static int attempt = 3;
         private int username;
         private string password;
@@ -57,13 +56,29 @@ namespace KeyManagementSystem.Boundary
             LoginController helper = new LoginController();
             int username = Convert.ToInt32(idBox.Text);
             string password = passwordBox.Text;
-            helper.login(username, password);
+            int x = helper.login(username, password);
+            if (x==-1)
+            {
+                idBox.Text = "";
+                passwordBox.Text = "";
+                DialogResult result;
+                result = MessageBox.Show("Invalid Login Credentials.", "");
+            }
+            else
+            {
+                Close();
+            }
         }
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-            idBox.Text = null;
-            passwordBox.Text = null;
+            idBox.Text = "";
+            passwordBox.Text = "";
+        }
+
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

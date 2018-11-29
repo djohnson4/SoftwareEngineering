@@ -12,8 +12,6 @@ using System.Data.SqlClient;
 using System.Configuration;
 using KeyManagementSystem.Entity;
 using KeyManagementSystem.Controller;
-using Newtonsoft.Json;
-
 
 namespace KeyManagementSystem.Controller
 {
@@ -22,14 +20,7 @@ namespace KeyManagementSystem.Controller
         private readonly SqlConnection connection = new SqlConnection("Database1.mdf");
         string command;
         //SqlCommand command = new SqlCommand();
-        Employee verifyUser(string username, string password)
-        {
-            //when do passwords get hashed and how does that work? 
-
-            //passwords get hashed when the login/account is created. The hashed passwords are saved to the database. Whenenever someone
-            //tries to login, the text is the textbox gets hashed, then the hashed password gets checked with the database
-        }
-
+        
         protected void createUser(int id, String password, Boolean isManager)
         {
             byte[] salt;
@@ -55,7 +46,7 @@ namespace KeyManagementSystem.Controller
             }
         }
 
-        public Employee getLogin(int id)
+        public Employee verifyUser(int id)
         {
             int eID;
             string password = null;

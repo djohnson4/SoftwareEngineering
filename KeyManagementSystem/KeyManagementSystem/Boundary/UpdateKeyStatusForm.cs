@@ -14,8 +14,10 @@ namespace KeyManagementSystem.Boundary
 {
     public partial class UpdateKeyStatusForm : Form
     {
-        public UpdateKeyStatusForm()
+        private static Employee thisUser;
+        public UpdateKeyStatusForm(Employee user)
         {
+            thisUser = user;
             InitializeComponent();
         }
 

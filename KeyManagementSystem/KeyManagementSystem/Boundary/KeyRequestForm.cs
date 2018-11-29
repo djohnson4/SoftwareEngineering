@@ -16,9 +16,11 @@ namespace KeyManagementSystem.Boundary
 {
     public partial class KeyRequestForm : Form
     {
+        private static Employee thisUser;
         private readonly SqlConnection connection = new SqlConnection("Database1.mdf");
-        public KeyRequestForm()
+        public KeyRequestForm(Employee user)
         {
+            thisUser = user;
             InitializeComponent();
         }
 
@@ -28,7 +30,7 @@ namespace KeyManagementSystem.Boundary
         }
 
         private void KeyRequestForm_Load(object sender, EventArgs e)
-        {
+        {            
             availableKeysList.DataSource = GetAvailableKeys();// TODO: This line of code loads data into the 'database1DataSet.KEY' table. You can move, or remove it, as needed.
             this.kEYTableAdapter.Fill(this.database1DataSet.KEY);
 
@@ -36,15 +38,15 @@ namespace KeyManagementSystem.Boundary
         private DataTable GetAvailableKeys()
         {
             DataTable Keys = new DataTable();
-            DBConnector.getKeys(user, ref Keys);//need to have a way of accessing the user for the current session
+            DBConnector con = new DBConnector();
+            con.getKeys(thisUser, ref Keys);//need to have a way of accessing the user for the current session
             return Keys;
         }
 
-        private void RequestKey(String keyID, int userID)
+        private void RequestKey(String keyID)
         {
             RequestController request = new RequestController();
-            var requestStatus = request.requestKey(keyID, userID);
-
+            var requestStatus = request.requestKey(keyID, thisUser.getEmployeeID());
         }
 
 

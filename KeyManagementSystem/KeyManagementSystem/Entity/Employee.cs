@@ -5,7 +5,7 @@ namespace KeyManagementSystem.Entity
 {
     public class Employee
     {
-        private Boolean aBoolean;
+        private Boolean isManager;
         private int userID;
         private string password;
 
@@ -15,11 +15,11 @@ namespace KeyManagementSystem.Entity
             this.password = password;
         }
 
-        public Employee(int userID, String password, Boolean aBoolean)
+        public Employee(int userID, String password, Boolean isManager)
         {
             this.userID = userID;
             this.password = password;
-            this.aBoolean = aBoolean;
+            this.isManager = isManager;
         }
 
         public String getPassword()
@@ -39,12 +39,12 @@ namespace KeyManagementSystem.Entity
 
         public Boolean getIsManager()
         {
-            return aBoolean;
+            return isManager;
         }
 
-        public void setIsManager(Boolean aBoolean)
+        public void setIsManager(Boolean isManager)
         {
-            this.aBoolean = aBoolean;
+            this.isManager = isManager;
         }
 
     }
