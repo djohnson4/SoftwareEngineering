@@ -17,7 +17,7 @@ namespace KeyManagementSystem.Controller
 {
     class DBConnector
     {
-        private static string connString = "Server=localhost;Database=Database1.mdf;Trusted_Connection=True";
+        private static string connString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=KeyDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private readonly SqlConnection connection = new SqlConnection(connString);
 
         string command;
