@@ -55,13 +55,10 @@ namespace KeyManagementSystem.Controller
             Boolean isManager;
             using (connection)
             {
-<<<<<<< HEAD
-                //connection.Open();
-                string sql = "SELECT id, password, isManager FROM dbo.USER WHERE id=@id";
-=======
-                connection.Open();
                 string sql = "SELECT id, password, isManager FROM USER WHERE id=@id";
->>>>>>> db80415133a0b4e24d1236efe588d108ee2e1a32
+                connection.Open();
+                
+
                 using(SqlCommand sqlCmd = new SqlCommand(sql, connection))
                 {
                     sqlCmd.Parameters.AddWithValue("@id", id);
