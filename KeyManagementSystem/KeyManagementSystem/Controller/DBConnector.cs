@@ -17,7 +17,8 @@ namespace KeyManagementSystem.Controller
 {
     class DBConnector
     {
-        private readonly SqlConnection connection = new SqlConnection("Database1.mdf");
+        private static string connString = "database=DB1;Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=Database1.mdf;Integrated Security=True";
+        private readonly SqlConnection connection = new SqlConnection(connString);
         string command;
         //SqlCommand command = new SqlCommand();
         
