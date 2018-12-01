@@ -55,7 +55,7 @@ namespace KeyManagementSystem.Controller
             Boolean isManager;
             using (connection)
             {
-                connection.Open();
+                //connection.Open();
                 string sql = "SELECT id, password, isManager FROM dbo.USER WHERE id=@id";
                 using(SqlCommand sqlCmd = new SqlCommand(sql, connection))
                 {
