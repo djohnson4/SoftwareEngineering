@@ -16,10 +16,9 @@ namespace KeyManagementSystem.Boundary
 {
     public partial class LoginForm : Form
     {
-        static int attempt = 3;
+        //static int attempt = 3;
         private int username;
         private string password;
-
 
         public LoginForm()
         {
@@ -51,13 +50,14 @@ namespace KeyManagementSystem.Boundary
 
         }
 
-        protected void login_Click(object sender, EventArgs e)
+        private void submitButton_Click(object sender, EventArgs e)
         {
             LoginController helper = new LoginController();
-            int username = Convert.ToInt32(idBox.Text);
-            string password = passwordBox.Text;
+            username = Convert.ToInt32(idBox.Text);
+            password = passwordBox.Text;
+            helper.login(username, password);
             int x = helper.login(username, password);
-            if (x==-1)
+            if (x == -1)
             {
                 idBox.Text = "";
                 passwordBox.Text = "";
@@ -77,6 +77,11 @@ namespace KeyManagementSystem.Boundary
         }
 
         private void label3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void passwordBox_TextChanged(object sender, EventArgs e)
         {
 
         }
