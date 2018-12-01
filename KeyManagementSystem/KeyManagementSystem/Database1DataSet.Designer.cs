@@ -1837,7 +1837,7 @@ SELECT keyID, dateTime, status, userID FROM [KEY] WHERE (keyID = @keyID)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT keyID, dateTime, status, userID FROM dbo.[KEY]";
+            this._commandCollection[0].CommandText = "SELECT keyID, dateTime, status, userID FROM [KEY]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2251,7 +2251,7 @@ SELECT start_dateTime, end_dateTime, sessionID, userID FROM SESSION WHERE (sessi
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT start_dateTime, end_dateTime, sessionID, userID FROM dbo.SESSION";
+            this._commandCollection[0].CommandText = "SELECT start_dateTime, end_dateTime, sessionID, userID FROM SESSION";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2652,7 +2652,7 @@ SELECT userID, password, isManager FROM [USER] WHERE (userID = @userID)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT userID, password, isManager FROM dbo.[USER]";
+            this._commandCollection[0].CommandText = "SELECT userID, password, isManager FROM [USER]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

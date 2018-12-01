@@ -9,7 +9,7 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="KEYTableAdapter" GeneratorDataComponentClassName="KEYTableAdapter" Name="KEY" UserDataComponentName="KEYTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="Database1ConnectionString (Settings)" DbObjectName="dbo.[KEY]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Database1ConnectionString (Settings)" DbObjectName="[KEY]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[KEY] WHERE (([keyID] = @Original_keyID) AND ((@IsNull_dateTime = 1 AND [dateTime] IS NULL) OR ([dateTime] = @Original_dateTime)) AND ((@IsNull_status = 1 AND [status] IS NULL) OR ([status] = @Original_status)) AND ((@IsNull_userID = 1 AND [userID] IS NULL) OR ([userID] = @Original_userID)))</CommandText>
@@ -38,7 +38,7 @@ SELECT keyID, dateTime, status, userID FROM [KEY] WHERE (keyID = @keyID)</Comman
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT keyID, dateTime, status, userID FROM dbo.[KEY]</CommandText>
+                    <CommandText>SELECT keyID, dateTime, status, userID FROM [KEY]</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -73,7 +73,7 @@ SELECT keyID, dateTime, status, userID FROM [KEY] WHERE (keyID = @keyID)</Comman
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SESSIONTableAdapter" GeneratorDataComponentClassName="SESSIONTableAdapter" Name="SESSION" UserDataComponentName="SESSIONTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="Database1ConnectionString (Settings)" DbObjectName="dbo.SESSION" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Database1ConnectionString (Settings)" DbObjectName="SESSION" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[SESSION] WHERE (((@IsNull_start_dateTime = 1 AND [start_dateTime] IS NULL) OR ([start_dateTime] = @Original_start_dateTime)) AND ((@IsNull_end_dateTime = 1 AND [end_dateTime] IS NULL) OR ([end_dateTime] = @Original_end_dateTime)) AND ([sessionID] = @Original_sessionID) AND ([userID] = @Original_userID))</CommandText>
@@ -101,7 +101,7 @@ SELECT start_dateTime, end_dateTime, sessionID, userID FROM SESSION WHERE (sessi
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT start_dateTime, end_dateTime, sessionID, userID FROM dbo.SESSION</CommandText>
+                    <CommandText>SELECT start_dateTime, end_dateTime, sessionID, userID FROM SESSION</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -135,7 +135,7 @@ SELECT start_dateTime, end_dateTime, sessionID, userID FROM SESSION WHERE (sessi
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="USERTableAdapter" GeneratorDataComponentClassName="USERTableAdapter" Name="USER" UserDataComponentName="USERTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="Database1ConnectionString (Settings)" DbObjectName="dbo.[USER]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Database1ConnectionString (Settings)" DbObjectName="[USER]" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[USER] WHERE (([userID] = @Original_userID) AND ([password] = @Original_password) AND ([isManager] = @Original_isManager))</CommandText>
@@ -159,7 +159,7 @@ SELECT userID, password, isManager FROM [USER] WHERE (userID = @userID)</Command
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT userID, password, isManager FROM dbo.[USER]</CommandText>
+                    <CommandText>SELECT userID, password, isManager FROM [USER]</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
