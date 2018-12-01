@@ -36,7 +36,7 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 string sql = null;
-                sql = "insert into dbo.USER ([userID], [password], [isManager]) values(@id,@password,@isManager)";
+                sql = "insert into USER ([userID], [password], [isManager]) values(@id,@password,@isManager)";
                 using(SqlCommand sqlCommand = new SqlCommand(sql, connection))
                 {
                     connection.Open();
@@ -56,7 +56,7 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 connection.Open();
-                string sql = "SELECT id, password, isManager FROM dbo.USER WHERE id=@id";
+                string sql = "SELECT id, password, isManager FROM USER WHERE id=@id";
                 using(SqlCommand sqlCmd = new SqlCommand(sql, connection))
                 {
                     sqlCmd.Parameters.AddWithValue("@id", id);
@@ -82,7 +82,7 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 connection.Open();
-                string sql = "SELECT userID FROM dbo.SESSION";
+                string sql = "SELECT userID FROM SESSION";
                 using(SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     using(SqlDataReader reader = cmd.ExecuteReader())
@@ -98,7 +98,7 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 string sql = "";
-                sql = "INSERT into dbo.SESSION ([userID], [sessionID], [time], [log]) values(@userID,@id,@log)";
+                sql = "INSERT into SESSION ([userID], [sessionID], [time], [log]) values(@userID,@id,@log)";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     connection.Open();
@@ -117,7 +117,7 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 connection.Open();
-                string sql = "SELECT userID FROM dbo.SESSION";
+                string sql = "SELECT userID FROM SESSION";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -133,7 +133,7 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 string sql = "";
-                sql = "INSERT into dbo.SESSION ([userID], [sessionID], [time], [log]) values(@userID,@id,@log)";
+                sql = "INSERT into SESSION ([userID], [sessionID], [time], [log]) values(@userID,@id,@log)";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     connection.Open();
@@ -151,10 +151,10 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 connection.Open();
-                String sql = "SELECT keyID FROM dbo.KEY WHERE userID=" +userID.ToString();
+                String sql = "SELECT keyID FROM KEY WHERE userID=" +userID.ToString();
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    command.CommandText = "Delete from dbo.KEY where keyID=" + keyID;
+                    command.CommandText = "Delete from KEY where keyID=" + keyID;
                     command.ExecuteNonQuery();
                     command.Parameters.AddWithValue("@keyID", keyID);
                     command.Parameters.AddWithValue("@status", status);
@@ -169,7 +169,7 @@ namespace KeyManagementSystem.Controller
         public void getKeys(Employee user, ref DataTable Keys)//accepts a user and a reference to a dataTable, and displays all the keys associated with that user or with 'open' status
         {
             int userID = user.getEmployeeID();
-            string stringcmd = "SELECT * FROM dbo.KEY WHERE userID = '" + userID.ToString()+"' OR status = 'open'";
+            string stringcmd = "SELECT * FROM KEY WHERE userID = '" + userID.ToString()+"' OR status = 'open'";
             string connString = ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
 
             using (SqlConnection con = new SqlConnection(connString))
@@ -184,7 +184,7 @@ namespace KeyManagementSystem.Controller
             }
             //var dataAdapter = new SqlDataAdapter(command, connection);
             //connection.Open();
-            //command = "SELECT * FROM dbo.KEY WHERE STATUS = 'open'";
+            //command = "SELECT * FROM KEY WHERE STATUS = 'open'";
             //SqlCommand input = new SqlCommand(command, connection);
             //input.CommandType = CommandType.Text;
             //dataAdapter.SelectCommand = input;
