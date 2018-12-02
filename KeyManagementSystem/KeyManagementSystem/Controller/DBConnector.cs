@@ -18,7 +18,7 @@ namespace KeyManagementSystem.Controller
     class DBConnector
     {
         private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
-        private readonly SqlConnection connection = new SqlConnection(connString);
+        private SqlConnection connection = new SqlConnection(connString); //will need to ininitiate in each method.  
         
         public void createUser(int id, String password, Boolean isManager)
         {
@@ -58,7 +58,7 @@ namespace KeyManagementSystem.Controller
                 String sql = "SELECT userID, password, isManager FROM dbo.[USER] WHERE userID=@id";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.Parameters.AddWithValue("@id", userID);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -80,12 +80,13 @@ namespace KeyManagementSystem.Controller
         public int verifyUser(int id, String password)
         {
             Employee employee = getEmployee(id);
-            using (connection)
+            SqlConnection conn = new SqlConnection(connString); //declare connections inside each statement.
+            using (conn)
             {
-                connection.Open();
+                conn.Open();
                 string sql = "SELECT userID, password, isManager FROM dbo.[USER] WHERE userID=@id";
 
-                using (SqlCommand sqlCmd = new SqlCommand(sql, connection))
+                using (SqlCommand sqlCmd = new SqlCommand(sql, conn))
                 {
                     sqlCmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
                     using (SqlDataReader sqlReader = sqlCmd.ExecuteReader())

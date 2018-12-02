@@ -64,7 +64,7 @@ namespace KeyManagementSystem.Boundary
             catch
             {
                 DialogResult result;
-                result = MessageBox.Show("Invalid Login Credentials", "", MessageBoxButtons.OK);
+                result = MessageBox.Show("Invalid Username", "", MessageBoxButtons.OK);
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     idBox.Text = "";
@@ -79,7 +79,7 @@ namespace KeyManagementSystem.Boundary
             if(password == string.Empty)
             {
                 DialogResult result;
-                result = MessageBox.Show("Invalid Login Credentials", "", MessageBoxButtons.OK);
+                result = MessageBox.Show("Password Field Cannot Be Empty", "", MessageBoxButtons.OK);
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     idBox.Text = "";
