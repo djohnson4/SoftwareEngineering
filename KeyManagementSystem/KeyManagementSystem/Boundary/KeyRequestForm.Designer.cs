@@ -57,9 +57,10 @@
             this.statusDataGridViewTextBoxColumn,
             this.userIDDataGridViewTextBoxColumn});
             this.availableKeysList.DataSource = this.kEYBindingSource;
-            this.availableKeysList.Location = new System.Drawing.Point(178, 96);
+            this.availableKeysList.Location = new System.Drawing.Point(234, 118);
+            this.availableKeysList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.availableKeysList.Name = "availableKeysList";
-            this.availableKeysList.Size = new System.Drawing.Size(445, 150);
+            this.availableKeysList.Size = new System.Drawing.Size(593, 185);
             this.availableKeysList.TabIndex = 1;
             this.availableKeysList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -101,6 +102,7 @@
             // 
             this.database1DataSetBindingSource.DataSource = this.database1DataSet;
             this.database1DataSetBindingSource.Position = 0;
+            this.database1DataSetBindingSource.CurrentChanged += new System.EventHandler(this.database1DataSetBindingSource_CurrentChanged);
             // 
             // kEYTableAdapter
             // 
@@ -117,9 +119,10 @@
             // requestKey
             // 
             this.requestKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.requestKey.Location = new System.Drawing.Point(335, 270);
+            this.requestKey.Location = new System.Drawing.Point(447, 332);
+            this.requestKey.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.requestKey.Name = "requestKey";
-            this.requestKey.Size = new System.Drawing.Size(126, 37);
+            this.requestKey.Size = new System.Drawing.Size(168, 46);
             this.requestKey.TabIndex = 2;
             this.requestKey.Text = "Request Key";
             this.requestKey.UseVisualStyleBackColor = true;
@@ -128,22 +131,25 @@
             // logOff
             // 
             this.logOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logOff.Location = new System.Drawing.Point(358, 325);
+            this.logOff.Location = new System.Drawing.Point(477, 400);
+            this.logOff.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.logOff.Name = "logOff";
-            this.logOff.Size = new System.Drawing.Size(75, 29);
+            this.logOff.Size = new System.Drawing.Size(100, 36);
             this.logOff.TabIndex = 3;
             this.logOff.Text = "Log Off";
             this.logOff.UseVisualStyleBackColor = true;
+            this.logOff.Click += new System.EventHandler(this.logOff_Click);
             // 
             // KeyRequestForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.logOff);
             this.Controls.Add(this.requestKey);
             this.Controls.Add(this.availableKeysList);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "KeyRequestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Key Request & Tracking System";

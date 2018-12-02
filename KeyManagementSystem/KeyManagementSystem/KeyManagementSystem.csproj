@@ -73,7 +73,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Boundary\KeyRequestForm1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KeyRequestForm.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controller\LoginController.cs" />
+    <Compile Include="Controller\LogoutController.cs" />
     <Compile Include="Controller\RequestController.cs" />
     <Compile Include="Database1DataSet.Designer.cs">
       <AutoGen>True</AutoGen>

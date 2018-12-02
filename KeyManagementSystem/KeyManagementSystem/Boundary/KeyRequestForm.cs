@@ -60,5 +60,17 @@ namespace KeyManagementSystem.Boundary
             availableKeysList.Update();
             availableKeysList.Refresh();
         }
+
+        private void database1DataSetBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logOff_Click(object sender, EventArgs e)
+        {
+            LogoutController helper = new LogoutController();
+            helper.logout(thisUser.getEmployeeID()); // This calls 'logout' method from LogoutController and passes in ther UsersID. Need to ensure this is done properly. 
+            Close();
+        }
     }
 }
