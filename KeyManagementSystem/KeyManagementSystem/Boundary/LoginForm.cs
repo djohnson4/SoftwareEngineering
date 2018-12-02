@@ -52,30 +52,43 @@ namespace KeyManagementSystem.Boundary
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            int iFalse;
             LoginController helper = new LoginController();
-            while (validInput == false)
+            //********************************************//
+            //   Try/Catch to validate userID is an INT   //
+            //********************************************//
+            try
             {
-                try
+                username = Convert.ToInt32(idBox.Text);
+                validInput = true;
+            }
+            catch
+            {
+                DialogResult result;
+                result = MessageBox.Show("Invalid Login Credentials", "", MessageBoxButtons.OK);
+                if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    username = Convert.ToInt32(idBox.Text);
-                    validInput = true;
-                }
-                catch
-                {
-                    DialogResult result;
-                    result = MessageBox.Show("Invalid Login Credentials", "Confirm", MessageBoxButtons.OK);
-                    if (result == System.Windows.Forms.DialogResult.OK)
-                    {
-                        idBox.Text = "";
-                        passwordBox.Text = "";
-                        return;
-                    }
+                    idBox.Text = "";
+                    passwordBox.Text = "";
+                    return;
                 }
             }
-
+            //****************************************************************//
+            // This if-statement ensures that the password field is not empty//
+            //**************************************************************//
             password = passwordBox.Text;
-            helper.login(username, password);
+            if(password == string.Empty)
+            {
+                DialogResult result;
+                result = MessageBox.Show("Invalid Login Credentials", "", MessageBoxButtons.OK);
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    idBox.Text = "";
+                    passwordBox.Text = "";
+                    return;
+                }
+            }
+            
+            helper.login(username, password); //Both previous conditions pass, pass input to the DB. 
             int x = helper.login(username, password);
             if (x == -1)
             {
