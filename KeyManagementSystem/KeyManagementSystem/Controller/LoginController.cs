@@ -16,33 +16,22 @@ namespace KeyManagementSystem.Controller
         {
             DateTime dateTime = DateTime.Now;
             DBConnector dBConnector = new DBConnector();
-            Employee employee = dBConnector.verifyUser(id);
-            if (IsNumericType(employee.getEmployeeID()) && !employee.getPassword().Equals(null))
+            int verdict = dBConnector.verifyUser(id, password);
+            if (verdict == 1)//verified, is a manager
             {
-                String pHash = employee.getPassword();
-                byte[] hash = Convert.FromBase64String(pHash);
-                byte[] salt = new byte[16];
-                Array.Copy(hash, 0, salt, 0, 16);
-                var keyD = new Rfc2898DeriveBytes(password, salt, 10000);
-                byte[] hash1 = keyD.GetBytes(20);
-                for (int i = 0; i < 20; i++)
-                    if (hash[i + 16] != hash[i])
-                        return -1;
-                if (employee.getIsManager() == true)
-                {
-                    dBConnector.saveLogin(employee.getEmployeeID(), dateTime);
-                    UpdateKeyStatusForm mgr = new UpdateKeyStatusForm(employee);
-                    mgr.Show();
-                    return 0;
-                }
-                else if (employee.getIsManager() == false)
-                {
-                    dBConnector.saveLogin(employee.getEmployeeID(), dateTime);
-                    KeyRequestForm krf = new KeyRequestForm(employee);
-                    krf.Show();
-                    return 1;
-                }
-                return -1;
+                Employee user = new Employee(id, "notstored", true);//creates a new instance of employee with given id, dummy password, and isMgr = true
+                dBConnector.saveLogin(user.getEmployeeID(), dateTime);
+                UpdateKeyStatusForm mgr = new UpdateKeyStatusForm(user);
+                mgr.Show();
+                return 0;
+            }
+            else if (verdict == 0)//verified, not a manager
+            {
+                Employee user = new Employee(id, "notstored", false);//creates a new instance of employee with given id, dummy password, and isMgr = false
+                dBConnector.saveLogin(user.getEmployeeID(), dateTime);
+                KeyRequestForm krf = new KeyRequestForm(user);
+                krf.Show();
+                return 1;
             }
             return -1;
         }

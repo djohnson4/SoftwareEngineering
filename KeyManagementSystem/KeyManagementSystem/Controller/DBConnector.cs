@@ -4,13 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
 using KeyManagementSystem.Entity;
 using KeyManagementSystem.Controller;
+
 
 namespace KeyManagementSystem.Controller
 {
@@ -47,27 +52,52 @@ namespace KeyManagementSystem.Controller
                 connection.Close();
             }
         }
-
         public Employee verifyUser(int id)
         {
-            string password = null;
             Boolean isManager;
             using (connection)
             {
                 connection.Open();
-                string sql = "SELECT id, password, isManager FROM dbo.[USER] WHERE userID=@id";
+                string sql = "SELECT userID, password, isManager FROM dbo.[USER] WHERE userID=@id";
 
-                using(SqlCommand sqlCmd = new SqlCommand(sql, connection))
+                using (SqlCommand sqlCmd = new SqlCommand(sql, connection))
                 {
-                    sqlCmd.Parameters.AddWithValue("@id", id);
-                    using (SqlDataReader sqlReader = sqlCmd.ExecuteReader())
+                    sqlCmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                    if (sqlReader.Read())//if user is found
                     {
-                        id = Convert.ToInt32(sqlReader["id"].ToString());
-                        password = sqlReader["password"].ToString();
-                        if (sqlReader["isManager"].ToString().Equals(true))
-                            isManager = true;
+                        int Eid = Convert.ToInt32(sqlReader.GetValue(0));
+                        string Hashedpassword = sqlReader.GetValue(1).ToString();
+                        int bitMgr = Convert.ToInt32(sqlReader.GetValue(2));
+
+                        //hashing the input password
+                        byte[] salt;
+                        new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+                        var keyD = new Rfc2898DeriveBytes(password, salt, 10000);
+                        byte[] hash = keyD.GetBytes(20);
+                        byte[] hashB = new byte[36];
+                        Array.Copy(salt, 0, hashB, 0, 16);
+                        Array.Copy(hash, 0, hashB, 16, 20);
+                        string inputHashed = Convert.ToBase64String(hashB);
+                        //checking the hashed input against the hashed password from database
+                        for (int i = 0; i < 20; i++)
+                            if (hash[i + 16] != hash[i])
+                                return -1;
+                        if (bitMgr == 0)
+                        {
+                            return 0;
+                        }
+                        else if (bitMgr == 1)
+                        {
+                            return 1;
+                        }
                         else
-                            isManager = false;
+                        { throw new Exception("The manager status of this user is not set properly."); }
+                        //Employee result = new Employee(Eid, Hashedpassword, isMgr);
+                    }
+                    else
+                    {
+                        return -1; // some value to indicate a missing record
+                                   // or throw an exception
                     }
                 }
                 connection.Close();
