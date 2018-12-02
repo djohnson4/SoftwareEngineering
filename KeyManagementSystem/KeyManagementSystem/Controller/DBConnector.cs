@@ -18,10 +18,7 @@ namespace KeyManagementSystem.Controller
     {
         private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
         private readonly SqlConnection connection = new SqlConnection(connString);
-
-        string command;
-        //SqlCommand command = new SqlCommand();
-        
+                
         protected void createUser(int id, String password, Boolean isManager)
         {
             byte[] salt;

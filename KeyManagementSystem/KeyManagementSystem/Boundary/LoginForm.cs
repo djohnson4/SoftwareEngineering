@@ -18,6 +18,7 @@ namespace KeyManagementSystem.Boundary
     {
         private int username;
         private string password;
+        private Boolean validInput; //Usernames are ints and passwords cannot be blank. 
 
         public LoginForm()
         {
@@ -26,7 +27,7 @@ namespace KeyManagementSystem.Boundary
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -51,8 +52,28 @@ namespace KeyManagementSystem.Boundary
 
         private void submitButton_Click(object sender, EventArgs e)
         {
+            int iFalse;
             LoginController helper = new LoginController();
-            username = Convert.ToInt32(idBox.Text);
+            while (validInput == false)
+            {
+                try
+                {
+                    username = Convert.ToInt32(idBox.Text);
+                    validInput = true;
+                }
+                catch
+                {
+                    DialogResult result;
+                    result = MessageBox.Show("Invalid Login Credentials", "Confirm", MessageBoxButtons.OK);
+                    if (result == System.Windows.Forms.DialogResult.OK)
+                    {
+                        idBox.Text = "";
+                        passwordBox.Text = "";
+                        return;
+                    }
+                }
+            }
+
             password = passwordBox.Text;
             helper.login(username, password);
             int x = helper.login(username, password);
@@ -60,8 +81,7 @@ namespace KeyManagementSystem.Boundary
             {
                 idBox.Text = "";
                 passwordBox.Text = "";
-                DialogResult result;
-                result = MessageBox.Show("Invalid Login Credentials.", "");
+                MessageBox.Show("Invalid Login Credentials.", "");
             }
             else
             {
