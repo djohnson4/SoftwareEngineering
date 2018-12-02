@@ -48,9 +48,38 @@ namespace KeyManagementSystem.Controller
                 connection.Close();
             }
         }
-        public int verifyUser(int id, string password)
+        public Employee getEmployee(int userID)
         {
-            
+            string password = null;
+            Boolean isManager = false;
+            using (connection)
+            {
+                connection.Open();
+                String sql = "SELECT userID, password, isManager FROM dbo.[USER] WHERE userID=@id";
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            password = reader["password"].ToString();
+                            if (reader["isManager"].ToString().Equals(0))
+                                isManager = false;
+                            else if (reader["isManager"].ToString().Equals(1))
+                                isManager = true;
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            Employee employee = new Employee(userID, password, isManager);
+            return employee;
+
+        }
+        public int verifyUser(int id, String password)
+        {
+            Employee employee = getEmployee(id);
             using (connection)
             {
                 connection.Open();
@@ -64,7 +93,17 @@ namespace KeyManagementSystem.Controller
 
                         if (sqlReader.Read())//if user is found
                         {
-                            int Eid = Convert.ToInt32(sqlReader.GetValue(0));
+                            string savedPasswordH = employee.getPassword();
+                            byte[] hashB = Convert.FromBase64String(savedPasswordH);
+                            byte[] salt = new byte[16];
+                            Array.Copy(hashB, 0, salt, 0, 16);
+                            var pbkdf2 = new Rfc2898DeriveBytes(savedPasswordH, salt, 10000);
+                            byte[] hash = pbkdf2.GetBytes(20);
+                            for (int i = 0; i < 20; i++)
+                                if (hash[i + 16] != hash[i])
+                                    return -1;
+
+                            /*
                             string Hashedpassword = sqlReader.GetValue(1).ToString();
                             int bitMgr = Convert.ToInt32(sqlReader.GetValue(2));
 
@@ -81,11 +120,12 @@ namespace KeyManagementSystem.Controller
                             for (int i = 0; i < 20; i++)
                                 if (hash[i + 16] != hash[i])
                                     return -1;
-                            if (bitMgr == 0)
+                            */
+                            if (employee.getIsManager() == false)
                             {
                                 return 0;
                             }
-                            else if (bitMgr == 1)
+                            else if (employee.getIsManager() == true)
                             {
                                 return 1;
                             }
@@ -126,7 +166,7 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 string sql = "";
-                sql = "INSERT into SESSION ([userID], [sessionID], [time], [log]) values(@userID,@id,@log)";
+                sql = "INSERT into dbo.[SESSION] (userID, sessionID, datet, log) values(@userID.@id, @log)";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     connection.Open();
@@ -145,7 +185,7 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 connection.Open();
-                string sql = "SELECT userID FROM SESSION";
+                string sql = "SELECT userID FROM dbo.[SESSION]";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
