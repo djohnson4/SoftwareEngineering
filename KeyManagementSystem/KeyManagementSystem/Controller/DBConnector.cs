@@ -18,8 +18,8 @@ namespace KeyManagementSystem.Controller
     {
         private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
         private readonly SqlConnection connection = new SqlConnection(connString);
-                
-        protected void createUser(int id, String password, Boolean isManager)
+        
+        public void createUser(int id, String password, Boolean isManager)
         {
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
@@ -32,15 +32,19 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 string sql = null;
-                sql = "insert into USER ([userID], [password], [isManager]) values(@id,@password,@isManager)";
-                using(SqlCommand sqlCommand = new SqlCommand(sql, connection))
+                sql = "INSERT INTO dbo.[USER] (userID, password, isManager) VALUES (@id, @password, @isManager)";
+                using (SqlCommand sqlCommand = new SqlCommand(sql, connection))
                 {
                     connection.Open();
-                    sqlCommand.Parameters.AddWithValue("@userID", id);
-                    sqlCommand.Parameters.AddWithValue("@password", pHash);
-                    sqlCommand.Parameters.AddWithValue("@isManager", isManager);
+                    sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                    sqlCommand.Parameters.AddWithValue("@password", SqlDbType.VarChar).Value = pHash;
+                    if (isManager)
+                        sqlCommand.Parameters.AddWithValue("@isManager", SqlDbType.Bit).Value = 1;
+                    else
+                        sqlCommand.Parameters.AddWithValue("@isManager", SqlDbType.Bit).Value = 0;
                     sqlCommand.ExecuteNonQuery();
                 }
+                connection.Close();
             }
         }
 
