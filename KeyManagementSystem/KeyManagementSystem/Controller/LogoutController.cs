@@ -20,7 +20,8 @@ namespace KeyManagementSystem.Controller
         {
             int user = userID;
             DBConnector dbc = new DBConnector();
-            //dbc.saveLogout(user, ); //need to log the time user logs out. 
+            DateTime dateTime = DateTime.Now;
+            dbc.saveLogout(user, dateTime); //Passes userID and time of logout to the DBConnector. 
             LoginForm lf = new LoginForm();
             lf.Show();
         }
