@@ -8,7 +8,6 @@ using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using System.Data.SqlClient;
 using System.Configuration;
 using KeyManagementSystem.Entity;
 using KeyManagementSystem.Controller;
@@ -17,7 +16,7 @@ namespace KeyManagementSystem.Controller
 {
     class DBConnector
     {
-        private static string connString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=KeyDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
         private readonly SqlConnection connection = new SqlConnection(connString);
 
         string command;
@@ -50,21 +49,19 @@ namespace KeyManagementSystem.Controller
 
         public Employee verifyUser(int id)
         {
-            int eID;
             string password = null;
             Boolean isManager;
             using (connection)
             {
-                string sql = "SELECT id, password, isManager FROM USER WHERE id=@id";
                 connection.Open();
-                
+                string sql = "SELECT id, password, isManager FROM dbo.[USER] WHERE userID=@id";
 
                 using(SqlCommand sqlCmd = new SqlCommand(sql, connection))
                 {
                     sqlCmd.Parameters.AddWithValue("@id", id);
                     using (SqlDataReader sqlReader = sqlCmd.ExecuteReader())
                     {
-                        eID = Convert.ToInt32(sqlReader["id"].ToString());
+                        id = Convert.ToInt32(sqlReader["id"].ToString());
                         password = sqlReader["password"].ToString();
                         if (sqlReader["isManager"].ToString().Equals(true))
                             isManager = true;

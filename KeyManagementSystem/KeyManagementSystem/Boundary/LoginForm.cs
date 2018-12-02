@@ -16,7 +16,6 @@ namespace KeyManagementSystem.Boundary
 {
     public partial class LoginForm : Form
     {
-        //static int attempt = 3;
         private int username;
         private string password;
 
