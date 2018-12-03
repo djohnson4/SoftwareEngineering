@@ -12,6 +12,11 @@ namespace KeyManagementSystem.Controller
 {
     class LoginController
     {
+        LoginForm thisForm = new LoginForm();
+        public void open()
+        {
+            thisForm.ShowDialog();
+        }
         public int login(int id, String password)//returns -1 if invalid, 0 if a manager, 1 if an employee
         {
             DateTime dateTime = DateTime.Now;
@@ -20,16 +25,18 @@ namespace KeyManagementSystem.Controller
             if (verdict == 1)//verified, is a manager
             {
                 Employee user = new Employee(id, "notstored", true);//creates a new instance of employee with given id, dummy password, and isMgr = true
-                //.saveLogin(user.getEmployeeID(), dateTime);
+                dBConnector.saveLogin(user.getEmployeeID(), dateTime);
                 UpdateKeyStatusForm mgr = new UpdateKeyStatusForm(user);
+                
                 mgr.ShowDialog();
                 return 0;
             }
             else if (verdict == 0)//verified, not a manager
             {
                 Employee user = new Employee(id, "notstored", false);//creates a new instance of employee with given id, dummy password, and isMgr = false
-                //dBConnector.saveLogin(user.getEmployeeID(), dateTime);
+                dBConnector.saveLogin(user.getEmployeeID(), dateTime);
                 KeyRequestForm krf = new KeyRequestForm(user);
+
                 krf.ShowDialog();
                 return 1;
             }

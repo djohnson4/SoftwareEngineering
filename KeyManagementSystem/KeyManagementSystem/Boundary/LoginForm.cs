@@ -85,19 +85,17 @@ namespace KeyManagementSystem.Boundary
                     return;
                 }
             }
-            
-            helper.login(username, password); //Both previous conditions pass, pass input to the DB. 
+            this.Hide();
+            helper.login(username, password); //Both previous conditions pass, pass input to the DB. login will open key request form
             int x = helper.login(username, password);
             if (x == -1)
             {
                 idBox.Text = "";
                 passwordBox.Text = "";
+                this.ShowDialog();
                 MessageBox.Show("Invalid Login Credentials.", "");
             }
-            else
-            {
-                this.Hide();
-            }
+
         }
 
         private void clearButton_Click(object sender, EventArgs e)

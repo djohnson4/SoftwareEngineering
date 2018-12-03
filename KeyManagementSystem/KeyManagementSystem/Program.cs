@@ -23,7 +23,8 @@ namespace KeyManagementSystem
             DBConnector populate = new DBConnector();
 
             //populate.createUser(4, "password4", false);
-            Application.Run(new LoginForm());
+            LoginController boss = new LoginController();
+            boss.open();
         }
     }
 }

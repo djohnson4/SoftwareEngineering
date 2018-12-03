@@ -18,7 +18,8 @@ namespace KeyManagementSystem.Controller
 {
     class DBConnector
     {
-        private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\aubre\\Documents\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
+        string connString = ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+        //string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\aubre\\Documents\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
         //private SqlConnection connection = new SqlConnection(connString); //will need to ininitiate in each method.  
 
         private string passwordHash(string password)
@@ -106,6 +107,7 @@ namespace KeyManagementSystem.Controller
         public int verifyUser(int id, String password)
         {
             Employee employee = getEmployee(id);
+            SqlConnection connection = new SqlConnection(connString);
             SqlConnection conn = new SqlConnection(connString); //declare connections inside each statement. 
             using (conn)
             {
@@ -176,44 +178,48 @@ namespace KeyManagementSystem.Controller
             }
         }
 
-        //public void saveLogin(int userID, DateTime date)
-        //{
-        //    SqlConnection connection = new SqlConnection(connString);
-        //    int id = 0;
-        //    using (connection)
-        //    {
-        //        connection.Open();
-        //        string sql = "SELECT userID FROM SESSION";
-        //        using(SqlCommand cmd = new SqlCommand(sql, connection))
-        //        {
-        //            using(SqlDataReader reader = cmd.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    id++;
-        //                }
-        //            }
-        //        }
-        //        connection.Close();
-        //    }
-        //    using (connection)
-        //    {
-        //        string sql = "";
-        //        sql = "INSERT into dbo.[SESSION] (userID, sessionID, datet, log) values(@userID.@id, @log)";
-        //        using (SqlCommand cmd = new SqlCommand(sql, connection))
-        //        {
-        //            connection.Open();
-        //            cmd.Parameters.AddWithValue("@userID", userID);
-        //            cmd.Parameters.AddWithValue("@sessioID", id);
-        //            cmd.Parameters.AddWithValue("@time", date);
-        //            cmd.Parameters.AddWithValue("@log", "Login");
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
+        public void saveLogin(int userID, DateTime date)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+            SqlConnection connection = new SqlConnection(connString);
+            int id = 0;
+            using (connection)
+            {
+                connection.Open();
+                string sql = "SELECT userID FROM SESSION";
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            id++;
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            SqlConnection connection2 = new SqlConnection(connString);
+            using (connection2)
+            {
+                string sql = "";
+                sql = "INSERT into dbo.[SESSION] ([userID], [sessionID], [date], [log]) values(@userID,@id,@time,@log)";
+                using (SqlCommand cmd = new SqlCommand(sql, connection2))
+                {
+                    connection2.Open();
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                    //cmd.Parameters.AddWithValue("@sessionID", id);
+                    cmd.Parameters.AddWithValue("@time", date);
+                    cmd.Parameters.AddWithValue("@log", "Login");
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
         public void saveLogout(int userID, DateTime date)
         {
+            string connString = ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
             SqlConnection connection = new SqlConnection(connString);
             int id = 0;
             using (connection)
@@ -230,20 +236,18 @@ namespace KeyManagementSystem.Controller
                         }
                     }
                 }
-                connection.Close();
-            }
-            using (connection)
-            {
-                string sql = "";
-                sql = "INSERT into SESSION ([userID], [sessionID], [time], [log]) values(@userID,@id,@log)";
+                //connection.Close();
+            
+                sql = "";
+                sql = "INSERT into SESSION ([userID], [sessionID], [date], [log]) values(@userID,@id,@time,@log)";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
-                {
-                    connection.Open();
+                {                    
                     cmd.Parameters.AddWithValue("@userID", userID);
-                    cmd.Parameters.AddWithValue("@sessioID", id);
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                    //cmd.Parameters.AddWithValue("@id", id); must declare scalar variable
                     cmd.Parameters.AddWithValue("@time", date);
                     cmd.Parameters.AddWithValue("@log", "Logout");
-                    cmd.ExecuteNonQuery();
+                    int result = cmd.ExecuteNonQuery();
                 }
             }
         }
