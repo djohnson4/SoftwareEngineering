@@ -11,7 +11,7 @@ namespace KeyManagementSystem.Controller
 {
     class RequestController
     {
-        public String requestKey(String keyID, int userID)
+        public String requestKey(int keyID, int userID)
         {
             DBConnector db = new DBConnector();
             return db.changeStatus("Requested", keyID, userID);

@@ -23,7 +23,12 @@ namespace KeyManagementSystem.Boundary
         {
             InitializeComponent();
         }
-
+        //public LoginForm(KeyRequestForm oldForm)
+        //{
+        //    oldForm.Hide();
+        //    oldForm.Close();
+        //    InitializeComponent();
+        //}
         private void Form1_Load(object sender, EventArgs e)
         {
             

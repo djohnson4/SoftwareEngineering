@@ -22,7 +22,7 @@ namespace KeyManagementSystem
             Application.SetCompatibleTextRenderingDefault(false);
             DBConnector populate = new DBConnector();
 
-            //populate.createUser(4, "password4", false);
+            populate.createUser(42, "42", false);
             LoginController boss = new LoginController();
             boss.open();
         }

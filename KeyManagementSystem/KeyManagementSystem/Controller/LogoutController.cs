@@ -16,14 +16,16 @@ namespace KeyManagementSystem.Controller
         Methods - logout takes in a user. 
         Calls on classes DBConnector and LoginForm.
         */
-        public void logout(int userID) 
+        public void logout(int userID, KeyRequestForm oldform) 
         {
             int user = userID;
             DBConnector dbc = new DBConnector();
             DateTime dateTime = DateTime.Now;
-            dbc.saveLogout(user, dateTime); //Passes userID and time of logout to the DBConnector. 
+            dbc.saveLogout(user, dateTime); //Passes userID and time of logout to the DBConnector.
             LoginForm lf = new LoginForm();
-            lf.Show();
+            oldform.Hide();
+            oldform.Close();
+            lf.ShowDialog();
         }
     }
 }

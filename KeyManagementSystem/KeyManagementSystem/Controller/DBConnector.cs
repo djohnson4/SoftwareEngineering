@@ -57,7 +57,8 @@ namespace KeyManagementSystem.Controller
             using (conn)
             {
                 string sql = null;
-                sql = "INSERT INTO dbo.[USER] (userID, password, isManager) VALUES (@id, @password, @isManager)";
+               // sql = "insert into dbo.USER ([userID], [password], [isManager]) values(@id,@password,@isManager)";
+                sql = "INSERT INTO dbo.[USER] ([userID], [password], [isManager]) VALUES (@id, @password, @isManager)";
                 using (SqlCommand sqlCommand = new SqlCommand(sql, conn))
                 {
                     conn.Open();
@@ -252,7 +253,7 @@ namespace KeyManagementSystem.Controller
             }
         }
 
-        public String changeStatus(String status, String keyID, int userID)
+        public String changeStatus(String status, int keyID, int userID)
         {
             SqlConnection connection = new SqlConnection(connString);
             using (connection)
@@ -261,7 +262,7 @@ namespace KeyManagementSystem.Controller
                 String sql = "SELECT keyID FROM dbo.[KEY] WHERE userID=" +userID.ToString();
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    command.CommandText = "Delete from KEY where keyID=" + keyID;
+                    command.CommandText = "Delete from dbo.[KEY] where keyID=" + keyID.ToString();
                     command.ExecuteNonQuery();
                     command.Parameters.AddWithValue("@keyID", keyID);
                     command.Parameters.AddWithValue("@status", status);
