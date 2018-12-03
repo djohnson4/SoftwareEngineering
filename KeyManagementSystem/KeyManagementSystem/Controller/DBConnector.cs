@@ -18,20 +18,32 @@ namespace KeyManagementSystem.Controller
 {
     class DBConnector
     {
-        private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
+        private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\aubre\\Documents\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
         //private SqlConnection connection = new SqlConnection(connString); //will need to ininitiate in each method.  
-        
+        private string passwordHash(string password)
+        {
+            byte[] salt;//creating salt, step 1
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);//creating salt, step 2
+            var keyD = new Rfc2898DeriveBytes(password, salt, 10000);//step 1 for hashing pw
+            byte[] hash = keyD.GetBytes(20);//step 2 for hashing pw
+            byte[] hashB = new byte[36];//step 1 of combining salt and pw bytes
+            Array.Copy(salt, 0, hashB, 0, 16);//step 2 of combining salt and pw bytes
+            Array.Copy(hash, 0, hashB, 16, 20);//step 3 of combining salt and pw bytes
+            string pHash = Convert.ToBase64String(hashB);//salted & hashed password becomes a string for storage
+            return pHash;
+        }
         public void createUser(int id, String password, Boolean isManager)
         {
             SqlConnection conn = new SqlConnection(connString);
-            byte[] salt;
-            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-            var keyD = new Rfc2898DeriveBytes(password, salt, 10000);
-            byte[] hash = keyD.GetBytes(20);
-            byte[] hashB = new byte[36];
-            Array.Copy(salt, 0, hashB, 0, 16);
-            Array.Copy(hash, 0, hashB, 16, 20);
-            string pHash = Convert.ToBase64String(hashB);
+            string pHash = passwordHash(password);
+            //byte[] salt;//creating salt, step 1
+            //new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);//creating salt, step 2
+            //var keyD = new Rfc2898DeriveBytes(password, salt, 10000);//step 1 for hashing pw
+            //byte[] hash = keyD.GetBytes(20);//step 2 for hashing pw
+            //byte[] hashB = new byte[36];//step 1 of combining salt and pw bytes
+            //Array.Copy(salt, 0, hashB, 0, 16);//step 2 of combining salt and pw bytes
+            //Array.Copy(hash, 0, hashB, 16, 20);//step 3 of combining salt and pw bytes
+            //string pHash = Convert.ToBase64String(hashB);//salted & hashed password becomes a string for storage
             using (conn)
             {
                 string sql = null;
