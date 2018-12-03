@@ -18,34 +18,9 @@ namespace KeyManagementSystem.Controller
 {
     class DBConnector
     {
-        private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
+        private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\aubre\\Documents\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
         //private SqlConnection connection = new SqlConnection(connString); //will need to ininitiate in each method.  
-<<<<<<< HEAD
-        //private string passwordHash(string password)
-        //{
-        //    byte[] salt;//creating salt, step 1
-        //    new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);//creating salt, step 2
-        //    var keyD = new Rfc2898DeriveBytes(password, salt, 10000);//step 1 for hashing pw
-        //    byte[] hash = keyD.GetBytes(20);//step 2 for hashing pw
-        //    byte[] hashB = new byte[36];//step 1 of combining salt and pw bytes
-        //    Array.Copy(salt, 0, hashB, 0, 16);//step 2 of combining salt and pw bytes
-        //    Array.Copy(hash, 0, hashB, 16, 20);//step 3 of combining salt and pw bytes
-        //    string pHash = Convert.ToBase64String(hashB);//salted & hashed password becomes a string for storage
-        //    return pHash;
-        //}
-        public void createUser(int id, String password, Boolean isManager)
-        {
-            SqlConnection conn = new SqlConnection(connString);
-            //string pHash = passwordHash(password);
-            //byte[] salt;//creating salt, step 1
-            //new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);//creating salt, step 2
-            //var keyD = new Rfc2898DeriveBytes(password, salt, 10000);//step 1 for hashing pw
-            //byte[] hash = keyD.GetBytes(20);//step 2 for hashing pw
-            //byte[] hashB = new byte[36];//step 1 of combining salt and pw bytes
-            //Array.Copy(salt, 0, hashB, 0, 16);//step 2 of combining salt and pw bytes
-            //Array.Copy(hash, 0, hashB, 16, 20);//step 3 of combining salt and pw bytes
-            //string pHash = Convert.ToBase64String(hashB);//salted & hashed password becomes a string for storage
-=======
+
         private string passwordHash(string password)
         {
             byte[] salt;//creating salt, step 1
@@ -78,7 +53,6 @@ namespace KeyManagementSystem.Controller
             SqlConnection conn = new SqlConnection(connString);
             string pHash = passwordHash(password);
 
->>>>>>> bc3191006615e8a6d80a14e983786d84d1a324a5
             using (conn)
             {
                 string sql = null;
@@ -87,7 +61,7 @@ namespace KeyManagementSystem.Controller
                 {
                     conn.Open();
                     sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = id;
-                    sqlCommand.Parameters.AddWithValue("@password", SqlDbType.VarChar).Value = password;
+                    sqlCommand.Parameters.AddWithValue("@password", SqlDbType.VarChar).Value = password;//should this be pHash instead?
                     if (isManager)
                         sqlCommand.Parameters.AddWithValue("@isManager", SqlDbType.Bit).Value = 1;
                     else
@@ -144,31 +118,23 @@ namespace KeyManagementSystem.Controller
                     {
                         if (sqlReader.Read())//if user is found
                         {
-<<<<<<< HEAD
                             string untrustedString = password;
-                            //string savedPasswordH = employee.getPassword();
-=======
+                            
                             string savedPasswordH = employee.getPassword();
                             if (!savedPasswordH.Equals(password))
                                 return -1;
                             //if (!passwordCheck(savedPasswordH, password))
                             //    return -1;
                             // below here is the original code. Aubrey made changes and put it into the passwordCheck method
->>>>>>> bc3191006615e8a6d80a14e983786d84d1a324a5
+
                             //byte[] hashB = Convert.FromBase64String(savedPasswordH);
                             //byte[] salt = new byte[16];
                             //Array.Copy(hashB, 0, salt, 0, 16);
                             //var pbkdf2 = new Rfc2898DeriveBytes(savedPasswordH, salt, 10000);
                             //byte[] hash = pbkdf2.GetBytes(20);
                             //for (int i = 0; i < 20; i++)
-<<<<<<< HEAD
-                                //if (hash[i + 16] != hash[i])
-                                    //return -1;
-=======
                             //    if (hash[i + 16] != hash[i]) // comparing the same array to itself? 
                             //        return -1;
->>>>>>> bc3191006615e8a6d80a14e983786d84d1a324a5
-
                             /* 
                             string Hashedpassword = sqlReader.GetValue(1).ToString();
                             int bitMgr = Convert.ToInt32(sqlReader.GetValue(2));

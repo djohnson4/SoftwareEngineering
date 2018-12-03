@@ -22,7 +22,7 @@ namespace KeyManagementSystem.Controller
                 Employee user = new Employee(id, "notstored", true);//creates a new instance of employee with given id, dummy password, and isMgr = true
                 //.saveLogin(user.getEmployeeID(), dateTime);
                 UpdateKeyStatusForm mgr = new UpdateKeyStatusForm(user);
-                mgr.Show();
+                mgr.ShowDialog();
                 return 0;
             }
             else if (verdict == 0)//verified, not a manager
@@ -30,7 +30,7 @@ namespace KeyManagementSystem.Controller
                 Employee user = new Employee(id, "notstored", false);//creates a new instance of employee with given id, dummy password, and isMgr = false
                 //dBConnector.saveLogin(user.getEmployeeID(), dateTime);
                 KeyRequestForm krf = new KeyRequestForm(user);
-                krf.Show();
+                krf.ShowDialog();
                 return 1;
             }
             else

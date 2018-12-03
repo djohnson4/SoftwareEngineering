@@ -30,10 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.availableKeysList = new System.Windows.Forms.DataGridView();
-            this.keyIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastUpdatedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kEYBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.database1DataSet = new KeyManagementSystem.Database1DataSet();
             this.database1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -41,6 +37,10 @@
             this.tableAdapterManager = new KeyManagementSystem.Database1DataSetTableAdapters.TableAdapterManager();
             this.requestKey = new System.Windows.Forms.Button();
             this.logOff = new System.Windows.Forms.Button();
+            this.keyIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastUpdatedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.availableKeysList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kEYBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.database1DataSet)).BeginInit();
@@ -53,40 +53,15 @@
             this.availableKeysList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.availableKeysList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.keyIDDataGridViewTextBoxColumn,
-            this.lastUpdatedDataGridViewTextBoxColumn,
             this.statusDataGridViewTextBoxColumn,
+            this.lastUpdatedDataGridViewTextBoxColumn,
             this.userIDDataGridViewTextBoxColumn});
             this.availableKeysList.DataSource = this.kEYBindingSource;
-            this.availableKeysList.Location = new System.Drawing.Point(234, 118);
-            this.availableKeysList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.availableKeysList.Location = new System.Drawing.Point(176, 96);
             this.availableKeysList.Name = "availableKeysList";
-            this.availableKeysList.Size = new System.Drawing.Size(593, 185);
+            this.availableKeysList.Size = new System.Drawing.Size(445, 150);
             this.availableKeysList.TabIndex = 1;
             this.availableKeysList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // keyIDDataGridViewTextBoxColumn
-            // 
-            this.keyIDDataGridViewTextBoxColumn.DataPropertyName = "keyID";
-            this.keyIDDataGridViewTextBoxColumn.HeaderText = "keyID";
-            this.keyIDDataGridViewTextBoxColumn.Name = "keyIDDataGridViewTextBoxColumn";
-            // 
-            // lastUpdatedDataGridViewTextBoxColumn
-            // 
-            this.lastUpdatedDataGridViewTextBoxColumn.DataPropertyName = "lastUpdated";
-            this.lastUpdatedDataGridViewTextBoxColumn.HeaderText = "lastUpdated";
-            this.lastUpdatedDataGridViewTextBoxColumn.Name = "lastUpdatedDataGridViewTextBoxColumn";
-            // 
-            // statusDataGridViewTextBoxColumn
-            // 
-            this.statusDataGridViewTextBoxColumn.DataPropertyName = "status";
-            this.statusDataGridViewTextBoxColumn.HeaderText = "status";
-            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
-            // 
-            // userIDDataGridViewTextBoxColumn
-            // 
-            this.userIDDataGridViewTextBoxColumn.DataPropertyName = "userID";
-            this.userIDDataGridViewTextBoxColumn.HeaderText = "userID";
-            this.userIDDataGridViewTextBoxColumn.Name = "userIDDataGridViewTextBoxColumn";
             // 
             // kEYBindingSource
             // 
@@ -119,10 +94,9 @@
             // requestKey
             // 
             this.requestKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.requestKey.Location = new System.Drawing.Point(447, 332);
-            this.requestKey.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.requestKey.Location = new System.Drawing.Point(335, 270);
             this.requestKey.Name = "requestKey";
-            this.requestKey.Size = new System.Drawing.Size(168, 46);
+            this.requestKey.Size = new System.Drawing.Size(126, 37);
             this.requestKey.TabIndex = 2;
             this.requestKey.Text = "Request Key";
             this.requestKey.UseVisualStyleBackColor = true;
@@ -131,25 +105,47 @@
             // logOff
             // 
             this.logOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logOff.Location = new System.Drawing.Point(477, 400);
-            this.logOff.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.logOff.Location = new System.Drawing.Point(358, 325);
             this.logOff.Name = "logOff";
-            this.logOff.Size = new System.Drawing.Size(100, 36);
+            this.logOff.Size = new System.Drawing.Size(75, 29);
             this.logOff.TabIndex = 3;
             this.logOff.Text = "Log Off";
             this.logOff.UseVisualStyleBackColor = true;
             this.logOff.Click += new System.EventHandler(this.logOff_Click);
             // 
+            // keyIDDataGridViewTextBoxColumn
+            // 
+            this.keyIDDataGridViewTextBoxColumn.DataPropertyName = "keyID";
+            this.keyIDDataGridViewTextBoxColumn.HeaderText = "keyID";
+            this.keyIDDataGridViewTextBoxColumn.Name = "keyIDDataGridViewTextBoxColumn";
+            // 
+            // statusDataGridViewTextBoxColumn
+            // 
+            this.statusDataGridViewTextBoxColumn.DataPropertyName = "status";
+            this.statusDataGridViewTextBoxColumn.HeaderText = "status";
+            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+            // 
+            // lastUpdatedDataGridViewTextBoxColumn
+            // 
+            this.lastUpdatedDataGridViewTextBoxColumn.DataPropertyName = "lastUpdated";
+            this.lastUpdatedDataGridViewTextBoxColumn.HeaderText = "lastUpdated";
+            this.lastUpdatedDataGridViewTextBoxColumn.Name = "lastUpdatedDataGridViewTextBoxColumn";
+            // 
+            // userIDDataGridViewTextBoxColumn
+            // 
+            this.userIDDataGridViewTextBoxColumn.DataPropertyName = "userID";
+            this.userIDDataGridViewTextBoxColumn.HeaderText = "userID";
+            this.userIDDataGridViewTextBoxColumn.Name = "userIDDataGridViewTextBoxColumn";
+            // 
             // KeyRequestForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.logOff);
             this.Controls.Add(this.requestKey);
             this.Controls.Add(this.availableKeysList);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "KeyRequestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Key Request & Tracking System";
@@ -169,11 +165,11 @@
         private Database1DataSetTableAdapters.KEYTableAdapter kEYTableAdapter;
         private Database1DataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.DataGridView availableKeysList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn keyIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button requestKey;
         private System.Windows.Forms.Button logOff;
+        private System.Windows.Forms.DataGridViewTextBoxColumn keyIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastUpdatedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userIDDataGridViewTextBoxColumn;
     }
 }

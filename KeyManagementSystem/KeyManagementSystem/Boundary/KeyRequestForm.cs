@@ -32,9 +32,8 @@ namespace KeyManagementSystem.Boundary
 
         private void KeyRequestForm_Load(object sender, EventArgs e)
         {            
-            availableKeysList.DataSource = GetAvailableKeys();// TODO: This line of code loads data into the 'database1DataSet.KEY' table. You can move, or remove it, as needed.
-            this.kEYTableAdapter.Fill(this.database1DataSet.KEY);
-
+            this.availableKeysList.DataSource = GetAvailableKeys();
+            //this.kEYTableAdapter.Fill(this.database1DataSet.KEY);
         }
         private DataTable GetAvailableKeys()
         {

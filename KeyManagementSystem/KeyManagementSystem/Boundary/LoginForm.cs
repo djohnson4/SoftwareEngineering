@@ -96,7 +96,7 @@ namespace KeyManagementSystem.Boundary
             }
             else
             {
-                Close();
+                this.Hide();
             }
         }
 
