@@ -33,7 +33,10 @@ namespace KeyManagementSystem.Controller
                 krf.Show();
                 return 1;
             }
-            return -1;
+            else
+            {
+                return -1;
+            }            
         }
         public static bool IsNumericType(object o)
         {

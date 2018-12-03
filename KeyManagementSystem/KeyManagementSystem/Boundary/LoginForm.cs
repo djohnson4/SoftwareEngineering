@@ -18,7 +18,6 @@ namespace KeyManagementSystem.Boundary
     {
         private int username;
         private string password;
-        private Boolean validInput; //Usernames are ints and passwords cannot be blank. 
 
         public LoginForm()
         {
@@ -59,7 +58,6 @@ namespace KeyManagementSystem.Boundary
             try
             {
                 username = Convert.ToInt32(idBox.Text);
-                validInput = true;
             }
             catch
             {

@@ -11,6 +11,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using KeyManagementSystem.Entity;
 using KeyManagementSystem.Controller;
+using System.Windows.Forms; //DELETE - For testing only
 
 
 namespace KeyManagementSystem.Controller
@@ -18,10 +19,11 @@ namespace KeyManagementSystem.Controller
     class DBConnector
     {
         private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
-        private SqlConnection connection = new SqlConnection(connString); //will need to ininitiate in each method.  
+        //private SqlConnection connection = new SqlConnection(connString); //will need to ininitiate in each method.  
         
         public void createUser(int id, String password, Boolean isManager)
         {
+            SqlConnection conn = new SqlConnection(connString);
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
             var keyD = new Rfc2898DeriveBytes(password, salt, 10000);
@@ -30,13 +32,13 @@ namespace KeyManagementSystem.Controller
             Array.Copy(salt, 0, hashB, 0, 16);
             Array.Copy(hash, 0, hashB, 16, 20);
             string pHash = Convert.ToBase64String(hashB);
-            using (connection)
+            using (conn)
             {
                 string sql = null;
                 sql = "INSERT INTO dbo.[USER] (userID, password, isManager) VALUES (@id, @password, @isManager)";
-                using (SqlCommand sqlCommand = new SqlCommand(sql, connection))
+                using (SqlCommand sqlCommand = new SqlCommand(sql, conn))
                 {
-                    connection.Open();
+                    conn.Open();
                     sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = id;
                     sqlCommand.Parameters.AddWithValue("@password", SqlDbType.VarChar).Value = pHash;
                     if (isManager)
@@ -45,18 +47,20 @@ namespace KeyManagementSystem.Controller
                         sqlCommand.Parameters.AddWithValue("@isManager", SqlDbType.Bit).Value = 0;
                     sqlCommand.ExecuteNonQuery();
                 }
-                connection.Close();
+                conn.Close();
             }
         }
+
         public Employee getEmployee(int userID)
         {
             string password = null;
             Boolean isManager = false;
-            using (connection)
+            SqlConnection conn = new SqlConnection(connString);
+            using (conn)
             {
-                connection.Open();
+                conn.Open();
                 String sql = "SELECT userID, password, isManager FROM dbo.[USER] WHERE userID=@id";
-                using (SqlCommand cmd = new SqlCommand(sql, connection))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", userID);
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -71,27 +75,26 @@ namespace KeyManagementSystem.Controller
                         }
                     }
                 }
-                connection.Close();
+                conn.Close();
             }
             Employee employee = new Employee(userID, password, isManager);
             return employee;
 
         }
+
         public int verifyUser(int id, String password)
         {
             Employee employee = getEmployee(id);
-            SqlConnection conn = new SqlConnection(connString); //declare connections inside each statement.
+            SqlConnection conn = new SqlConnection(connString); //declare connections inside each statement. 
             using (conn)
             {
                 conn.Open();
                 string sql = "SELECT userID, password, isManager FROM dbo.[USER] WHERE userID=@id";
-
                 using (SqlCommand sqlCmd = new SqlCommand(sql, conn))
                 {
                     sqlCmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
                     using (SqlDataReader sqlReader = sqlCmd.ExecuteReader())
                     {
-
                         if (sqlReader.Read())//if user is found
                         {
                             string savedPasswordH = employee.getPassword();
@@ -147,6 +150,7 @@ namespace KeyManagementSystem.Controller
 
         public void saveLogin(int userID, DateTime date)
         {
+            SqlConnection connection = new SqlConnection(connString);
             int id = 0;
             using (connection)
             {
@@ -182,6 +186,7 @@ namespace KeyManagementSystem.Controller
 
         public void saveLogout(int userID, DateTime date)
         {
+            SqlConnection connection = new SqlConnection(connString);
             int id = 0;
             using (connection)
             {
@@ -217,6 +222,7 @@ namespace KeyManagementSystem.Controller
 
         public String changeStatus(String status, String keyID, int userID)
         {
+            SqlConnection connection = new SqlConnection(connString);
             using (connection)
             {
                 connection.Open();
