@@ -32,18 +32,26 @@ namespace KeyManagementSystem.Controller
             string pHash = Convert.ToBase64String(hashB);//salted & hashed password becomes a string for storage
             return pHash;
         }
+        private bool passwordCheck(string savedPasswordH, string enteredPassword)//stored password (hashed) gets passed in
+        {
+            byte[] hashB = Convert.FromBase64String(savedPasswordH);//extract the bytes from the saved string
+            byte[] salt = new byte[16];//get salt step 1
+            Array.Copy(hashB, 0, salt, 0, 16);//get salt step 2
+            var enteredHashed = new Rfc2898DeriveBytes(enteredPassword, salt, 10000);//hash entered password
+            byte[] enteredHash = enteredHashed.GetBytes(20);//bytes for hashed version of entered password
+            for (int i = 0; i < 20; i++)//check each character in the bytes array of the real password against the entered password
+            {
+                if (hashB[i + 16] != enteredHash[i])//compare hashB from saved password with enteredHash of entered password
+                    return false;
+            }
+            return true;
+        }
+
         public void createUser(int id, String password, Boolean isManager)
         {
             SqlConnection conn = new SqlConnection(connString);
             string pHash = passwordHash(password);
-            //byte[] salt;//creating salt, step 1
-            //new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);//creating salt, step 2
-            //var keyD = new Rfc2898DeriveBytes(password, salt, 10000);//step 1 for hashing pw
-            //byte[] hash = keyD.GetBytes(20);//step 2 for hashing pw
-            //byte[] hashB = new byte[36];//step 1 of combining salt and pw bytes
-            //Array.Copy(salt, 0, hashB, 0, 16);//step 2 of combining salt and pw bytes
-            //Array.Copy(hash, 0, hashB, 16, 20);//step 3 of combining salt and pw bytes
-            //string pHash = Convert.ToBase64String(hashB);//salted & hashed password becomes a string for storage
+
             using (conn)
             {
                 string sql = null;
@@ -110,16 +118,21 @@ namespace KeyManagementSystem.Controller
                         if (sqlReader.Read())//if user is found
                         {
                             string savedPasswordH = employee.getPassword();
-                            byte[] hashB = Convert.FromBase64String(savedPasswordH);
-                            byte[] salt = new byte[16];
-                            Array.Copy(hashB, 0, salt, 0, 16);
-                            var pbkdf2 = new Rfc2898DeriveBytes(savedPasswordH, salt, 10000);
-                            byte[] hash = pbkdf2.GetBytes(20);
-                            for (int i = 0; i < 20; i++)
-                                if (hash[i + 16] != hash[i])
-                                    return -1;
+                            if (!savedPasswordH.Equals(password))
+                                return -1;
+                            //if (!passwordCheck(savedPasswordH, password))
+                            //    return -1;
+                            // below here is the original code. Aubrey made changes and put it into the passwordCheck method
+                            //byte[] hashB = Convert.FromBase64String(savedPasswordH);
+                            //byte[] salt = new byte[16];
+                            //Array.Copy(hashB, 0, salt, 0, 16);
+                            //var pbkdf2 = new Rfc2898DeriveBytes(savedPasswordH, salt, 10000);
+                            //byte[] hash = pbkdf2.GetBytes(20);
+                            //for (int i = 0; i < 20; i++)
+                            //    if (hash[i + 16] != hash[i]) // comparing the same array to itself? 
+                            //        return -1;
 
-                            /*
+                            /* 
                             string Hashedpassword = sqlReader.GetValue(1).ToString();
                             int bitMgr = Convert.ToInt32(sqlReader.GetValue(2));
 
