@@ -18,24 +18,24 @@ namespace KeyManagementSystem.Controller
 {
     class DBConnector
     {
-        private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\aubre\\Documents\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
+        private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
         //private SqlConnection connection = new SqlConnection(connString); //will need to ininitiate in each method.  
-        private string passwordHash(string password)
-        {
-            byte[] salt;//creating salt, step 1
-            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);//creating salt, step 2
-            var keyD = new Rfc2898DeriveBytes(password, salt, 10000);//step 1 for hashing pw
-            byte[] hash = keyD.GetBytes(20);//step 2 for hashing pw
-            byte[] hashB = new byte[36];//step 1 of combining salt and pw bytes
-            Array.Copy(salt, 0, hashB, 0, 16);//step 2 of combining salt and pw bytes
-            Array.Copy(hash, 0, hashB, 16, 20);//step 3 of combining salt and pw bytes
-            string pHash = Convert.ToBase64String(hashB);//salted & hashed password becomes a string for storage
-            return pHash;
-        }
+        //private string passwordHash(string password)
+        //{
+        //    byte[] salt;//creating salt, step 1
+        //    new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);//creating salt, step 2
+        //    var keyD = new Rfc2898DeriveBytes(password, salt, 10000);//step 1 for hashing pw
+        //    byte[] hash = keyD.GetBytes(20);//step 2 for hashing pw
+        //    byte[] hashB = new byte[36];//step 1 of combining salt and pw bytes
+        //    Array.Copy(salt, 0, hashB, 0, 16);//step 2 of combining salt and pw bytes
+        //    Array.Copy(hash, 0, hashB, 16, 20);//step 3 of combining salt and pw bytes
+        //    string pHash = Convert.ToBase64String(hashB);//salted & hashed password becomes a string for storage
+        //    return pHash;
+        //}
         public void createUser(int id, String password, Boolean isManager)
         {
             SqlConnection conn = new SqlConnection(connString);
-            string pHash = passwordHash(password);
+            //string pHash = passwordHash(password);
             //byte[] salt;//creating salt, step 1
             //new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);//creating salt, step 2
             //var keyD = new Rfc2898DeriveBytes(password, salt, 10000);//step 1 for hashing pw
@@ -52,7 +52,7 @@ namespace KeyManagementSystem.Controller
                 {
                     conn.Open();
                     sqlCommand.Parameters.Add("@id", SqlDbType.Int).Value = id;
-                    sqlCommand.Parameters.AddWithValue("@password", SqlDbType.VarChar).Value = pHash;
+                    sqlCommand.Parameters.AddWithValue("@password", SqlDbType.VarChar).Value = password;
                     if (isManager)
                         sqlCommand.Parameters.AddWithValue("@isManager", SqlDbType.Bit).Value = 1;
                     else
@@ -67,12 +67,12 @@ namespace KeyManagementSystem.Controller
         {
             string password = null;
             Boolean isManager = false;
-            SqlConnection conn = new SqlConnection(connString);
-            using (conn)
+            SqlConnection conn1 = new SqlConnection(connString);
+            using (conn1)
             {
-                conn.Open();
+                conn1.Open();
                 String sql = "SELECT userID, password, isManager FROM dbo.[USER] WHERE userID=@id";
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn1))
                 {
                     cmd.Parameters.AddWithValue("@id", userID);
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -87,7 +87,7 @@ namespace KeyManagementSystem.Controller
                         }
                     }
                 }
-                conn.Close();
+                conn1.Close();
             }
             Employee employee = new Employee(userID, password, isManager);
             return employee;
@@ -109,15 +109,16 @@ namespace KeyManagementSystem.Controller
                     {
                         if (sqlReader.Read())//if user is found
                         {
-                            string savedPasswordH = employee.getPassword();
-                            byte[] hashB = Convert.FromBase64String(savedPasswordH);
-                            byte[] salt = new byte[16];
-                            Array.Copy(hashB, 0, salt, 0, 16);
-                            var pbkdf2 = new Rfc2898DeriveBytes(savedPasswordH, salt, 10000);
-                            byte[] hash = pbkdf2.GetBytes(20);
-                            for (int i = 0; i < 20; i++)
-                                if (hash[i + 16] != hash[i])
-                                    return -1;
+                            string untrustedString = password;
+                            //string savedPasswordH = employee.getPassword();
+                            //byte[] hashB = Convert.FromBase64String(savedPasswordH);
+                            //byte[] salt = new byte[16];
+                            //Array.Copy(hashB, 0, salt, 0, 16);
+                            //var pbkdf2 = new Rfc2898DeriveBytes(savedPasswordH, salt, 10000);
+                            //byte[] hash = pbkdf2.GetBytes(20);
+                            //for (int i = 0; i < 20; i++)
+                                //if (hash[i + 16] != hash[i])
+                                    //return -1;
 
                             /*
                             string Hashedpassword = sqlReader.GetValue(1).ToString();
@@ -160,41 +161,41 @@ namespace KeyManagementSystem.Controller
             }
         }
 
-        public void saveLogin(int userID, DateTime date)
-        {
-            SqlConnection connection = new SqlConnection(connString);
-            int id = 0;
-            using (connection)
-            {
-                connection.Open();
-                string sql = "SELECT userID FROM SESSION";
-                using(SqlCommand cmd = new SqlCommand(sql, connection))
-                {
-                    using(SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            id++;
-                        }
-                    }
-                }
-                connection.Close();
-            }
-            using (connection)
-            {
-                string sql = "";
-                sql = "INSERT into dbo.[SESSION] (userID, sessionID, datet, log) values(@userID.@id, @log)";
-                using (SqlCommand cmd = new SqlCommand(sql, connection))
-                {
-                    connection.Open();
-                    cmd.Parameters.AddWithValue("@userID", userID);
-                    cmd.Parameters.AddWithValue("@sessioID", id);
-                    cmd.Parameters.AddWithValue("@time", date);
-                    cmd.Parameters.AddWithValue("@log", "Login");
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
+        //public void saveLogin(int userID, DateTime date)
+        //{
+        //    SqlConnection connection = new SqlConnection(connString);
+        //    int id = 0;
+        //    using (connection)
+        //    {
+        //        connection.Open();
+        //        string sql = "SELECT userID FROM SESSION";
+        //        using(SqlCommand cmd = new SqlCommand(sql, connection))
+        //        {
+        //            using(SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    id++;
+        //                }
+        //            }
+        //        }
+        //        connection.Close();
+        //    }
+        //    using (connection)
+        //    {
+        //        string sql = "";
+        //        sql = "INSERT into dbo.[SESSION] (userID, sessionID, datet, log) values(@userID.@id, @log)";
+        //        using (SqlCommand cmd = new SqlCommand(sql, connection))
+        //        {
+        //            connection.Open();
+        //            cmd.Parameters.AddWithValue("@userID", userID);
+        //            cmd.Parameters.AddWithValue("@sessioID", id);
+        //            cmd.Parameters.AddWithValue("@time", date);
+        //            cmd.Parameters.AddWithValue("@log", "Login");
+        //            cmd.ExecuteNonQuery();
+        //        }
+        //    }
+        //}
 
         public void saveLogout(int userID, DateTime date)
         {
@@ -238,7 +239,7 @@ namespace KeyManagementSystem.Controller
             using (connection)
             {
                 connection.Open();
-                String sql = "SELECT keyID FROM KEY WHERE userID=" +userID.ToString();
+                String sql = "SELECT keyID FROM dbo.[KEY] WHERE userID=" +userID.ToString();
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.CommandText = "Delete from KEY where keyID=" + keyID;
@@ -256,7 +257,7 @@ namespace KeyManagementSystem.Controller
         public void getKeys(Employee user, ref DataTable Keys)//accepts a user and a reference to a dataTable, and displays all the keys associated with that user or with 'open' status
         {
             int userID = user.getEmployeeID();
-            string stringcmd = "SELECT * FROM KEY WHERE userID = '" + userID.ToString()+"' OR status = 'open'";
+            string stringcmd = "SELECT * FROM dbo.[KEY] WHERE userID = '" + userID.ToString()+"' OR status = 'open'";
             string connString = ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
 
             using (SqlConnection con = new SqlConnection(connString))

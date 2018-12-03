@@ -20,7 +20,7 @@ namespace KeyManagementSystem.Controller
             if (verdict == 1)//verified, is a manager
             {
                 Employee user = new Employee(id, "notstored", true);//creates a new instance of employee with given id, dummy password, and isMgr = true
-                dBConnector.saveLogin(user.getEmployeeID(), dateTime);
+                //.saveLogin(user.getEmployeeID(), dateTime);
                 UpdateKeyStatusForm mgr = new UpdateKeyStatusForm(user);
                 mgr.Show();
                 return 0;
@@ -28,7 +28,7 @@ namespace KeyManagementSystem.Controller
             else if (verdict == 0)//verified, not a manager
             {
                 Employee user = new Employee(id, "notstored", false);//creates a new instance of employee with given id, dummy password, and isMgr = false
-                dBConnector.saveLogin(user.getEmployeeID(), dateTime);
+                //dBConnector.saveLogin(user.getEmployeeID(), dateTime);
                 KeyRequestForm krf = new KeyRequestForm(user);
                 krf.Show();
                 return 1;

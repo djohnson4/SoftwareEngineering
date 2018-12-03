@@ -17,7 +17,8 @@ namespace KeyManagementSystem.Boundary
     public partial class KeyRequestForm : Form
     {
         private static Employee thisUser;
-        private readonly SqlConnection connection = new SqlConnection("Database1.mdf");
+        private static string connString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=D:\\GitHub\\SoftwareEngineering\\KeyManagementSystem\\KeyManagementSystem\\Database1.mdf;Integrated Security=True";
+        private readonly SqlConnection connection = new SqlConnection(connString);
         public KeyRequestForm(Employee user)
         {
             thisUser = user;

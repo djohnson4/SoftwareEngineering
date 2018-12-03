@@ -20,6 +20,9 @@ namespace KeyManagementSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            DBConnector populate = new DBConnector();
+
+            //populate.createUser(4, "password4", false);
             Application.Run(new LoginForm());
         }
     }
